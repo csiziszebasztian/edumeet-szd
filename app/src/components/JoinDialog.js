@@ -363,6 +363,7 @@ const JoinDialog = ({
 												{(popupState) => (
 													<React.Fragment>
 														<Button
+															data-testid='localeButton'
 															className={classes.actionButton}
 															aria-label={locale.split(/[-_]/)[0]}
 															color='secondary'
@@ -609,8 +610,8 @@ const JoinDialog = ({
 										aria-label='choose permission'
 										exclusive
 									>
-										<ToggleButton value='{"audio":false,"video":false}'>
-											<Tooltip title={intl.formatMessage({
+										<ToggleButton data-testid='disable-toggleButton' value='{"audio":false,"video":false}'>
+											<Tooltip data-testid='disable-tooltip' title={intl.formatMessage({
 												id             : 'devices.disableBothMicrophoneAndCamera',
 												defaultMessage : 'Disable both Microphone And Camera'
 											})} placement='bottom'
@@ -618,8 +619,8 @@ const JoinDialog = ({
 												<BlockIcon/>
 											</Tooltip>
 										</ToggleButton>
-										<ToggleButton value='{"audio":true,"video":false}'>
-											<Tooltip title={intl.formatMessage({
+										<ToggleButton data-testid='mic-toggleButton' value='{"audio":true,"video":false}'>
+											<Tooltip data-testid='mic-tooltip' title={intl.formatMessage({
 												id             : 'devices.enableOnlyMicrophone',
 												defaultMessage : 'Enable only Microphone'
 											})} placement='bottom'
@@ -628,8 +629,8 @@ const JoinDialog = ({
 												<MicIcon/>
 											</Tooltip>
 										</ToggleButton>
-										<ToggleButton value='{"audio":false,"video":true}'>
-											<Tooltip title={intl.formatMessage({
+										<ToggleButton data-testid='cam-toggleButton' value='{"audio":false,"video":true}'>
+											<Tooltip data-testid='cam-tooltip' title={intl.formatMessage({
 												id             : 'devices.enableOnlyCamera',
 												defaultMessage : 'Enable only Camera'
 											})} placement='bottom'
@@ -637,8 +638,8 @@ const JoinDialog = ({
 												<VideocamIcon/>
 											</Tooltip>
 										</ToggleButton>
-										<ToggleButton value='{"audio":true,"video":true}'>
-											<Tooltip title={intl.formatMessage({
+										<ToggleButton data-testid='mic-cam-toggleButton' value='{"audio":true,"video":true}'>
+											<Tooltip data-testid='mic-cam-tooltip' title={intl.formatMessage({
 												id             : 'devices.enableBothMicrophoneAndCamera',
 												defaultMessage : 'Enable both Microphone and Camera'
 											})} placement='bottom'
