@@ -144,7 +144,7 @@ test('Test Disable tooltip',async ({page}) => {
   await toggleButton.hover();
   const tooltip = page.locator('role=tooltip');
   await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText('Enable only Microphone');
+  await expect(tooltip).toHaveText('Disable both Microphone and Camera');
 
 });
 
@@ -152,10 +152,10 @@ test('Test localization',async ({page}) => {
 
   const localeButton = page.locator('data-testid=localeButton');
   const joinButton = page.locator('id=joinButton');
-  await expect(joinButton).toContainText("Join");
+  await expect(joinButton).toContainText('Join');
   await localeButton.click();
   const hunButton = page.locator('text=Hungarian');
   await hunButton.click();
-  await expect(joinButton).toContainText("Kapcsolódás");
+  await expect(joinButton).toContainText('Kapcsolódás');
 
 });
