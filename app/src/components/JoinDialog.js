@@ -325,6 +325,7 @@ const JoinDialog = ({
 	return (
 		<div className={classes.root}>
 			<Dialog
+				data-testid='loginDialog'
 				onKeyDown={handleJoinUsingEnterKey}
 				open
 				classes={{
