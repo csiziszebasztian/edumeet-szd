@@ -509,6 +509,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='participantsButton'
 								aria-label={intl.formatMessage({
 									id             : 'tooltip.participants',
 									defaultMessage : 'Show participants'
@@ -531,6 +532,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='settingsButton'
 								aria-label={intl.formatMessage({
 									id             : 'tooltip.settings',
 									defaultMessage : 'Show settings'

@@ -227,6 +227,7 @@ class Room extends React.PureComponent
 					<nav>
 						<Hidden implementation='css'>
 							<SwipeableDrawer
+								test-dataid='drawer'
 								container={container}
 								variant='temporary'
 								anchor={theme.direction === 'rtl' ? 'right' : 'left'}
@@ -248,6 +249,7 @@ class Room extends React.PureComponent
 					<nav className={toolAreaOpen ? classes.drawer : null}>
 						<Hidden implementation='css'>
 							<Drawer
+								test-dataid='drawer'
 								variant='persistent'
 								anchor={theme.direction === 'rtl' ? 'right' : 'left'}
 								open={toolAreaOpen}
