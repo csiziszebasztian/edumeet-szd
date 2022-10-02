@@ -1,4 +1,6 @@
 import { test, expect } from '@playwright/test';
+import { EdummetPage } from '../playwright-support/edummet-page.js';
+import type { TooltipData } from '../playwright-support/edummet-page.js';
 
 
 test.beforeEach(async ({ page }, testInfo) => {
@@ -80,72 +82,66 @@ test('Media buttons',async ({page}) => {
 
 test('Test Microphone and Camera tooltip',async ({page}) => {
 
-  const parentTooltip = page.locator('data-testid=mic-cam-tooltip');
+  const edummetPage = new EdummetPage(page);
 
-  const parentTooltipText = await parentTooltip .getAttribute('title');
-  expect(parentTooltipText).toEqual('Enable both Microphone and Camera');
+  const tooltipData: TooltipData = {
+    parentTooltipLocator: 'data-testid=mic-cam-tooltip',
+    parentTooltipTitle: 'title',
+    tooltipText: 'Enable both Microphone and Camera',
+    hoverElmentLocator: 'data-testid=mic-cam-toggleButton',
+    toolTipLocator: 'role=tooltip',
+  };
 
-  const toggleButton = page.locator('data-testid=mic-cam-toggleButton');
-  await toggleButton.hover();
-  const tooltip = page.locator('role=tooltip');
-  await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText('Enable both Microphone and Camera');
+  await edummetPage.tooltipTest(tooltipData);
 
 });
 
 test('Test Camera tooltip',async ({page}) => {
 
-  const parentTooltip = page.locator('data-testid=cam-tooltip');
+  const edummetPage = new EdummetPage(page);
 
-  const parentTooltipText = await parentTooltip .getAttribute('title');
-  expect(parentTooltipText).toEqual('Enable only Camera');
+  const tooltipData: TooltipData = {
+    parentTooltipLocator: 'data-testid=cam-tooltip',
+    parentTooltipTitle: 'title',
+    tooltipText: 'Enable only Camera',
+    hoverElmentLocator: 'data-testid=cam-toggleButton',
+    toolTipLocator: 'role=tooltip',
+  };
 
-  const toggleButton = page.locator('data-testid=cam-toggleButton');
-  await toggleButton.hover();
-  const tooltip = page.locator('role=tooltip');
-  await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText('Enable only Camera');
+  await edummetPage.tooltipTest(tooltipData);
 
 });
 
 test('Test Microphone tooltip',async ({page}) => {
 
-  /*const tooltipData: TooltipData = {
+  const edummetPage = new EdummetPage(page);
+
+  const tooltipData: TooltipData = {
     parentTooltipLocator: 'data-testid=mic-tooltip',
     parentTooltipTitle: 'title',
-    parentTooltipText: 'Enable only Microphone',
-    hoverelmentLocator: 'data-testid=mic-toggleButton',
+    tooltipText: 'Enable only Microphone',
+    hoverElmentLocator: 'data-testid=mic-toggleButton',
     toolTipLocator: 'role=tooltip',
   };
 
-  edumeetTooltipTest(page, 'Microphone', tooltipData);*/
-
-  const parentTooltip = page.locator('data-testid=mic-tooltip');
-
-  const parentTooltipText = await parentTooltip.getAttribute('title');
-  expect(parentTooltipText).toEqual('Enable only Microphone');
-
-  const toggleButton = page.locator('data-testid=mic-toggleButton');
-  await toggleButton.hover();
-  const tooltip = page.locator('role=tooltip');
-  await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText('Enable only Microphone');
+  await edummetPage.tooltipTest(tooltipData);
 
 });
 
 test('Test Disable tooltip',async ({page}) => {
 
-  const parentTooltip = page.locator('data-testid=disable-tooltip');
+  const edummetPage = new EdummetPage(page);
 
-  const parentTooltipText = await parentTooltip .getAttribute('title');
-  expect(parentTooltipText).toEqual('Disable both Microphone and Camera');
+  const tooltipData: TooltipData = {
+    parentTooltipLocator: 'data-testid=disable-tooltip',
+    parentTooltipTitle: 'title',
+    tooltipText: 'Disable both Microphone and Camera',
+    hoverElmentLocator: 'data-testid=disable-toggleButton',
+    toolTipLocator: 'role=tooltip',
+  };
 
-  const toggleButton = page.locator('data-testid=disable-toggleButton');
-  await toggleButton.hover();
-  const tooltip = page.locator('role=tooltip');
-  await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText('Disable both Microphone and Camera');
-
+  await edummetPage.tooltipTest(tooltipData);
+  
 });
 
 test('Test localization',async ({page}) => {
