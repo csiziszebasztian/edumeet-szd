@@ -1,10 +1,10 @@
 import { test, expect } from '@playwright/test';
+import { EdummetPage } from '../playwright-support/edummet-page.js';
 
 test.beforeEach(async ({ page }, testInfo) => {
-  await page.goto('/');
-  await page.locator('id=roomId').fill('playwrightRoom');
-  await page.locator('id=displayname').fill('testUser1');
-  await page.locator('id=joinButton').click();
+  const edumeetPage = new EdummetPage(page);
+  edumeetPage.goto();
+  edumeetPage.login();
 });
 
 
@@ -65,15 +65,57 @@ test('Local menu',async ({page}) => {
 
 
 test('Lock room button test',async ({page}) => {
+  
   const lockRoomButton = page.locator('data-testid=lockRoomButton');
   const tooltip = page.locator('role=tooltip');
+  
   await expect(lockRoomButton).toBeVisible();
   await expect(lockRoomButton).toBeEnabled();
+  
   await expect(tooltip).not.toBeVisible();
   await lockRoomButton.hover();
   await expect(tooltip).toBeVisible();
   await expect(tooltip).toHaveText('Lock room');
-  await lockRoomButton.click();
+
 });
 
 
+test('Setting button test',async ({page}) => {
+  
+  const settingButton = page.locator('data-testid=settingsButton');
+  const settingDialog = page.locator('data-testid=settingDialog');
+  const tooltip = page.locator('role=tooltip');
+  
+  await expect(settingButton).toBeVisible();
+  await expect(settingButton).toBeEnabled();
+  
+  await expect(tooltip).not.toBeVisible();
+  await settingButton.hover();
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toHaveText('Show settings');
+
+  await expect(settingDialog).not.toBeVisible();
+  await settingButton.click();
+  await expect(settingDialog).toBeVisible();
+
+});
+
+test('Participants button test',async ({page}) => {
+  
+  const participantsButton = page.locator('data-testid=participantsButton');
+  const drawer = page.locator('data-testid=drawerRaiseHand');
+  const tooltip = page.locator('role=tooltip');
+  
+  await expect(participantsButton).toBeVisible();
+  await expect(participantsButton).toBeEnabled();
+  
+  await expect(tooltip).not.toBeVisible();
+  await participantsButton.hover();
+  await expect(tooltip).toBeVisible();
+  await expect(tooltip).toHaveText('Show participants');
+
+  await expect(drawer).not.toBeVisible();
+  await participantsButton.click();
+  await expect(drawer).toBeVisible();
+
+});
