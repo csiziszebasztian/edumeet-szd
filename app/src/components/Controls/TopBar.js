@@ -425,6 +425,7 @@ const TopBar = (props) =>
 						onClick={() => toggleToolArea()}
 					>
 						<IconButton
+							data-testid='openDrawer'
 							color='inherit'
 							aria-label={intl.formatMessage({
 								id             : 'label.openDrawer',
