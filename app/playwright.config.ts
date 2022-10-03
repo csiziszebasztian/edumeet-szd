@@ -48,6 +48,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
+      testIgnore: ["chat.spec.ts"],
       use: {
         ...devices['Desktop Chrome'],
         ignoreHTTPSErrors: true,
@@ -56,10 +57,16 @@ const config: PlaywrightTestConfig = {
 
     {
       name: 'firefox',
+      testIgnore: ["chat.spec.ts"],
       use: {
         ...devices['Desktop Firefox'],
         ignoreHTTPSErrors: true,
       },
+    },
+    {
+      name: 'chat',
+      testDir: './e2e',
+      testMatch: 'chat.spec.ts',
     },
 
     /*{
