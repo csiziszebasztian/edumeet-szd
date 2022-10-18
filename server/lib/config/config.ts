@@ -518,11 +518,12 @@ const configDocs = formatDocs({}, null, configSchema.getSchema());
 let config: any = {};
 let configError = '';
 let configLoaded = false;
+let configFileName = process.env.EDUMEET_CI && process.env.EDUMEET_CI === "playwright-automated-test" ? 'config.ci' : 'config'
 
 // Load config from file
 for (const format of [ 'json', 'json5', 'yaml', 'yml', 'toml' ]) // eslint-disable-line no-restricted-syntax
 {
-	const filepath = path.normalize(`${__dirname}/../../config/config.${format}`);
+	const filepath = path.normalize(`${__dirname}/../../config/${configFileName}.${format}`);
 
 	if (fs.existsSync(filepath))
 	{
@@ -558,14 +559,14 @@ catch (error: any)
 }
 
 // load additional config module (no validation is performed)
-const configModuleFilepath = path.normalize(`${__dirname}/../../config/config.js`);
+const configModuleFilepath = path.normalize(`${__dirname}/../../config/${configFileName}.js`);
 
 if (fs.existsSync(configModuleFilepath))
 {
 	try
 	{
 		logger.info(`Loading config module from ${configModuleFilepath}`);
-		const configModule = require('../../config/config.js'); // eslint-disable-line @typescript-eslint/no-var-requires
+		const configModule = require(`../../config/${configFileName}.js`); // eslint-disable-line @typescript-eslint/no-var-requires
 
 		Object.assign(config, configModule);
 	}
