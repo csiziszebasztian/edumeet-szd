@@ -43,9 +43,13 @@ jobs:
       - name: Install server dep and start
         working-directory: ./server
         run: yarn && yarn build && yarn start
+        env:
+          CI: true
       - name: Install app dep and start
         working-directory: ./app
         run: yarn && yarn build && yarn start
+        env:
+          CI: true
       - name: Playwright test 
         working-directory: ./app
         run: npx playwright test
