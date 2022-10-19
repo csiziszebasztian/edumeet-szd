@@ -55,7 +55,12 @@ jobs:
       - name: Start server
         working-directory: ./server
         run: yarn start
-      - name: start app
+        env:
+          # The hostname used to communicate with the Redis service container
+          REDIS_HOST: redis
+          # The default Redis port
+          REDIS_PORT: 6379
+      - name: Start app
         working-directory: ./app
         run: yarn start 
       - name: Playwright test 
@@ -66,16 +71,4 @@ jobs:
         with:
           name: playwright-report
           path: playwright-report/
-          retention-days: 30 
-
-
-      - name: Connect to Redis
-        # Runs a script that creates a Redis client, populates
-        # the client with data, and retrieves data
-        run: node client.js
-        # Environment variable used by the `client.js` script to create a new Redis client.
-        env:
-          # The hostname used to communicate with the Redis service container
-          REDIS_HOST: redis
-          # The default Redis port
-          REDIS_PORT: 6379
+          retention-days: 30
