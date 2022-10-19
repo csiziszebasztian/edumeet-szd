@@ -8,6 +8,8 @@ jobs:
     runs-on: ubuntu-latest
     # Docker Hub image that `container-job` executes in 
     container: tanulasdev/edu-ci:latest
+    env:
+      CI: false
 
     # Service containers to run with `container-job`
     services:
