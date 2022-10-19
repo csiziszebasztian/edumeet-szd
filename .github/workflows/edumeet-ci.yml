@@ -40,20 +40,22 @@ jobs:
           TURN_API_KEY: ${{ secrets.TURN_API_KEY }}
           EDUMEET_CI: "playwright-automated-test"
       # TODO: Caching npm package.
-      - name: Install server dep and start
-        working-directory: ./server
-        run: |
-          yarn 
-          yarn build & yarn start
-        env:
-          CI: true
-      - name: Install app dep and start
+      - name: Install app dep
         working-directory: ./app
         run: |
           yarn 
-          yarn build & yarn start 
-        env:
-          CI: true
+          yarn build 
+      - name: Install server dep
+        working-directory: ./server
+        run: |
+          yarn 
+          yarn build 
+      - name: Start server
+        working-directory: ./server
+        run: yarn start
+      - name: start app
+        working-directory: ./app
+        run: yarn start 
       - name: Playwright test 
         working-directory: ./app
         run: npx playwright test
