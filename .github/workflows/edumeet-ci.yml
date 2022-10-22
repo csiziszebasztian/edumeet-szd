@@ -55,11 +55,6 @@ jobs:
       - name: Start server
         working-directory: ./server
         run: yarn start
-        env:
-          # The hostname used to communicate with the Redis service container
-          REDIS_HOST: redis
-          # The default Redis port
-          REDIS_PORT: 6379
       - name: Start app
         working-directory: ./app
         run: yarn start 
