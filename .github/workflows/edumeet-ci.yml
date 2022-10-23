@@ -10,6 +10,9 @@ jobs:
     container: tanulasdev/edu-ci:latest
     env:
       CI: false
+      TURN_API_URI: ${{ secrets.TURN_API_URI }}
+      TURN_API_KEY: ${{ secrets.TURN_API_KEY }}
+      EDUMEET_CI: "playwright-automated-test"
 
     # Service containers to run with `container-job`
     services:
@@ -31,17 +34,9 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       # Setup env
-      # TODO: Secret
-      - name: Setup enviroment variables
-        run: |
-          export TURN_API_URI=$TURN_API_URI
-          export TURN_API_KEY=$TURN_API_KEY
-          export EDUMEET_CI=$EDUMEET_CI
-        env:
-          TURN_API_URI: ${{ secrets.TURN_API_URI }}
-          TURN_API_KEY: ${{ secrets.TURN_API_KEY }}
-          EDUMEET_CI: "playwright-automated-test"
       # TODO: Caching npm package.
+      - name: Test env
+        run: printenv EDUMEET_CI
       - name: Install app dep
         working-directory: ./app
         run: |
