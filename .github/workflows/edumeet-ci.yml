@@ -49,10 +49,11 @@ jobs:
           yarn build-ci
       - name: Start server
         working-directory: ./server
-        run: yarn start
+        run: |
+          yarn start & sleep 5
       - name: Start app
         working-directory: ./app
-        run: yarn start 
+        run: yarn start & sleep 5
       - name: Playwright test 
         working-directory: ./app
         run: npx playwright test
