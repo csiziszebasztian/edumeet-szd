@@ -92,7 +92,7 @@
     "not op_mini all"
   ],
   "devDependencies": {
-    "@playwright/test": "^1.25.1",
+    "@playwright/test": "1.27.0",
     "@types/chroma-js": "^2.1.3",
     "@types/convict": "^6.0.1",
     "@types/convict-format-with-validator": "^6.0.2",
