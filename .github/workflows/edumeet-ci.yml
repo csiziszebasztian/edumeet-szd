@@ -43,7 +43,7 @@ jobs:
       - name: Install app dep
         working-directory: ./app
         run: |
-          yarn --frozen-lockfile
+          yarn
           yarn build 
       - name: Setup Server Node.js
         uses: actions/setup-node@v3
@@ -54,7 +54,7 @@ jobs:
       - name: Install server dep
         working-directory: ./server
         run: |
-          yarn --frozen-lockfile
+          yarn
           yarn build-ci
       - name: Start server
         working-directory: ./server
