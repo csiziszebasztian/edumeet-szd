@@ -34,10 +34,8 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       # Setup env
-      - name: Test env
-        run: printenv EDUMEET_CI
-      - name: Setup App Node.js
-        working-directory: ./app
+      - name: Setup Node.js
+        working-directory: ./server
         uses: actions/setup-node@v3
         with: 
           node-version: '18'
@@ -46,12 +44,6 @@ jobs:
         run: |
           yarn --prefere-offline
           yarn build 
-      - name: Setup Server Node.js
-        working-directory: ./server
-        uses: actions/setup-node@v3
-        with: 
-          node-version: '18'
-          cache: 'yarn'
       - name: Install server dep
         working-directory: ./server
         run: |
