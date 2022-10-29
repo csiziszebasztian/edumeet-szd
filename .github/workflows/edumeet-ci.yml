@@ -30,11 +30,20 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-        
+      
+      # - name: Setup Node.js
+      #   uses: actions/setup-node@v3
+      #   with: 
+      #     node-version: '18'
+      #     cache: 'yarn'
+      # - name: Setup cache
+      #   uses: actions/cache@v3
+      #   id: cache
+      #   with:
+
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       # Setup env
-      # TODO: Caching npm package.
       - name: Test env
         run: printenv EDUMEET_CI
       - name: Install app dep
