@@ -135,7 +135,7 @@ test('Test Disable tooltip',async ({page}) => {
   const tooltipData: TooltipData = {
     parentTooltipLocator: 'data-testid=disable-tooltip',
     parentTooltipTitle: 'title',
-    tooltipText: 'Disable both Microphone and CameraAssddf',
+    tooltipText: 'Disable both Microphone and Camera',
     hoverElmentLocator: 'data-testid=disable-toggleButton',
     toolTipLocator: 'role=tooltip',
   };

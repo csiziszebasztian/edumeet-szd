@@ -30,31 +30,32 @@ jobs:
     steps:
       - name: Check out repository code
         uses: actions/checkout@v3
-      
-      # - name: Setup Node.js
-      #   uses: actions/setup-node@v3
-      #   with: 
-      #     node-version: '18'
-      #     cache: 'yarn'
-      # - name: Setup cache
-      #   uses: actions/cache@v3
-      #   id: cache
-      #   with:
 
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       # Setup env
       - name: Test env
         run: printenv EDUMEET_CI
-      - name: Install app dep
+      - name: Setup App Node.js
         working-directory: ./app
+        uses: actions/setup-node@v3
+        with: 
+          node-version: '18'
+          cache: 'yarn'
+      - name: Install app dep
         run: |
-          yarn 
+          yarn --prefere-offline
           yarn build 
+      - name: Setup Server Node.js
+        working-directory: ./server
+        uses: actions/setup-node@v3
+        with: 
+          node-version: '18'
+          cache: 'yarn'
       - name: Install server dep
         working-directory: ./server
         run: |
-          yarn 
+          yarn --prefere-offline
           yarn build-ci
       - name: Start server
         working-directory: ./server
