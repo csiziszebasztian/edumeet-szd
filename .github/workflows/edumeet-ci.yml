@@ -34,23 +34,11 @@ jobs:
       # Performs a clean installation of all dependencies in the `package.json` file
       # For more information, see https://docs.npmjs.com/cli/ci.html
       # Setup env
-      - name: Setup App Node.js
-        uses: actions/setup-node@v3
-        with: 
-          node-version: '18'
-          cache: 'yarn'
-          cache-dependency-path: ./app/yarn.lock
       - name: Install app dep
         working-directory: ./app
         run: |
           yarn
           yarn build 
-      - name: Setup Server Node.js
-        uses: actions/setup-node@v3
-        with: 
-          node-version: '18'
-          cache: 'yarn'
-          cache-dependency-path: ./server/yarn.lock
       - name: Install server dep
         working-directory: ./server
         run: |
