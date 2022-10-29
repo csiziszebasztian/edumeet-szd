@@ -59,7 +59,7 @@ jobs:
           sleep 5
       - name: Playwright test 
         working-directory: ./app
-        run: npx playwright test
+        run: HOME=/root npx playwright test
       - uses: actions/upload-artifact@v3
         if: always()
         with:
