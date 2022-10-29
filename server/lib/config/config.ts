@@ -518,7 +518,7 @@ const configDocs = formatDocs({}, null, configSchema.getSchema());
 let config: any = {};
 let configError = '';
 let configLoaded = false;
-let configFileName = process.env.EDUMEET_CI && process.env.EDUMEET_CI === "playwright-automated-test" ? 'config.ci' : 'config'
+let configFileName = process.env.EDUMEET_CI === "playwright-automated-test" ? 'config.ci' : 'config';
 
 // Load config from file
 for (const format of [ 'json', 'json5', 'yaml', 'yml', 'toml' ]) // eslint-disable-line no-restricted-syntax

@@ -46,7 +46,7 @@ jobs:
         working-directory: ./server
         run: |
           yarn 
-          yarn build 
+          yarn build-ci
       - name: Start server
         working-directory: ./server
         run: yarn start
