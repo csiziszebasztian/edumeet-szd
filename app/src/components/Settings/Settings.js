@@ -72,7 +72,7 @@ const Settings = ({
 				paper : classes.dialogPaper
 			}}
 		>
-			<DialogTitle id='form-dialog-title'>
+			<DialogTitle id='form-dialog-title' data-testid='settingDialog'>
 				<FormattedMessage
 					id='settings.settings'
 					defaultMessage='Settings'

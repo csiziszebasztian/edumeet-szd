@@ -74,6 +74,7 @@ const ListMe = (props) =>
 				placement='bottom'
 			>
 				<IconButton
+					data-testid='drawerRaiseHand'
 					aria-label={intl.formatMessage({
 						id             : 'tooltip.raisedHand',
 						defaultMessage : 'Raise hand'

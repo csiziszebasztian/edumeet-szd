@@ -1,0 +1,33 @@
+listeningPort: 3443
+listeningHost: localhost
+
+fileTracker: "wss://tracker.openwebtorrent.com"
+
+tls:
+  cert: ./certs/edumeet-demo-cert.pem
+  key:  ./certs/edumeet-demo-key.pem
+
+turnAPIURI: ${TURN_API_URI}
+turnAPIKey: ${TURN_API_KEY}
+
+backupTurnServers: 
+- urls: 
+  - "turn:host.domain.tld:443?transport=tcp"
+  username: "Your username"
+  credential: "Your's credential"
+
+redisOptions:
+  host: "redis"                                                                                                                                                                  
+  port: "6379"            
+
+prometheus:
+  enabled: true
+  deidentify: true
+  numeric: true
+  listen: localhost
+   
+mediasoup:
+  webRtcTransport:
+    listenIps:
+    - ip: "127.0.0.1"
+      announcedIp: ""

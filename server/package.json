@@ -16,6 +16,7 @@
 	"scripts": {
 		"start": "node dist/server.js",
 		"build": "mkdir -p dist && find dist/* -maxdepth 0 ! -name public -exec rm -rf {} \\; && tsc && ln -s ../certs dist/certs && chmod 755 dist/server.js && ( for fileExt in yaml json toml ; do [ -f config/config.$fileExt ] && cp config/config.$fileExt dist/config/; done ) | true && touch 'dist/ __AUTO_GENERATED_CONTENT_REFRESHED_AFTER_REBUILDING!__ '",
+		"build-ci": "mkdir -p dist && find dist/* -maxdepth 0 ! -name public -exec rm -rf {} \\; && tsc && ln -s ../certs dist/certs && chmod 755 dist/server.js && ( for fileExt in yaml json toml ; do [ -f config/config.ci.$fileExt ] && cp config/config.ci.$fileExt dist/config/; done ) | true && touch 'dist/ __AUTO_GENERATED_CONTENT_REFRESHED_AFTER_REBUILDING!__ '",
 		"dev": "nodemon --exec ts-node --ignore dist/ -e js,ts server.js",
 		"connect": "ts-node connect.js",
 		"lint": "eslint ./ --ext .js,.ts; exit 0",

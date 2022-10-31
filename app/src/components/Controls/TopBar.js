@@ -425,6 +425,7 @@ const TopBar = (props) =>
 						onClick={() => toggleToolArea()}
 					>
 						<IconButton
+							data-testid='openDrawer'
 							color='inherit'
 							aria-label={intl.formatMessage({
 								id             : 'label.openDrawer',
@@ -509,6 +510,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='participantsButton'
 								aria-label={intl.formatMessage({
 									id             : 'tooltip.participants',
 									defaultMessage : 'Show participants'
@@ -531,6 +533,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='settingsButton'
 								aria-label={intl.formatMessage({
 									id             : 'tooltip.settings',
 									defaultMessage : 'Show settings'
@@ -545,6 +548,7 @@ const TopBar = (props) =>
 						<Tooltip title={lockTooltip}>
 							<span className={classes.disabledButton}>
 								<IconButton
+									data-testid='lockRoomButton'
 									aria-label={intl.formatMessage({
 										id             : 'tooltip.lockRoom',
 										defaultMessage : 'Lock room'
@@ -659,6 +663,7 @@ const TopBar = (props) =>
 					<div className={classes.divider} />
 
 					<Button
+						data-testid='localeButton'
 						aria-label={locale.split(/[-_]/)[0]}
 						className={classes.actionButton}
 						color='secondary'
@@ -668,7 +673,7 @@ const TopBar = (props) =>
 						{locale.split(/[-_]/)[0]}
 					</Button>
 
-					<Button
+					<Button data-testid='leaveButton'
 						aria-label={intl.formatMessage({
 							id             : 'label.leave',
 							defaultMessage : 'Leave'

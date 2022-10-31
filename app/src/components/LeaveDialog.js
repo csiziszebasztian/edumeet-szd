@@ -96,6 +96,7 @@ const LeaveDialog = ({
 
 	return (
 		<Dialog
+			data-testid='leaveDialog'
 			onKeyDown={handleEnterKey}
 			open={leaveOpen}
 			onClose={() => handleSetLeaveOpen(false)}
@@ -117,6 +118,7 @@ const LeaveDialog = ({
 			</DialogContent>
 			<DialogActions className={classes.dialogActions}>
 				<Button
+					data-testid='leaveDialogNo'
 					onClick={handleStay}
 					color='primary'
 					startIcon={<CancelIcon />}
@@ -127,6 +129,7 @@ const LeaveDialog = ({
 					/>
 				</Button>
 				<Button
+					data-testid='leaveDialogYes'
 					onClick={handleLeave}
 					color='primary'
 					startIcon={<MeetingRoomIcon />}
