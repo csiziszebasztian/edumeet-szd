@@ -16,7 +16,8 @@ test('Browser title', async ({ page }) => {
 
 test('Join is disabled when no name', async ({ page }) => {
 
-  const joinButton = page.locator('id=joinButton');
+  const edumeetPage = new EdummetPage(page);
+  const joinButton = edumeetPage.getJoinButton();
 
   await expect(joinButton).toBeVisible();
   await expect(joinButton).toBeDisabled();
@@ -26,8 +27,10 @@ test('Join is disabled when no name', async ({ page }) => {
 
 test('Join become enable when fill name', async ({ page }) => {
 
-  const joinButton = page.locator('id=joinButton');
-  const dispalyName = page.locator('id=displayname');
+  const edumeetPage = new EdummetPage(page);
+
+  const joinButton = edumeetPage.getJoinButton();
+  const dispalyName = edumeetPage.getDisplayName();
 
   await expect(dispalyName).toBeVisible();
   await dispalyName.fill('TestName');

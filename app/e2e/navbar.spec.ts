@@ -1,8 +1,6 @@
 import { test, expect } from '@playwright/test';
 import { EdummetPage } from '../playwright-support/edummet-page.js';
 
-
-
 test.beforeEach(async ({ page }, testInfo) => {
   const edumeetPage = new EdummetPage(page);
   edumeetPage.goto();

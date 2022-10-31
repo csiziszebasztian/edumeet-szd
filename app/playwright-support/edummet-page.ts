@@ -30,10 +30,21 @@ export class EdummetPage {
         this.page = page;
     }
 
+    JOIN_BUTTON  = 'id=joinButton';
+    DISPLAY_NAME = 'id=displayname'; 
+
+
+    getJoinButton() {
+        return this.page.locator(this.JOIN_BUTTON);
+    }
+
+    getDisplayName() {
+        return this.page.locator(this.DISPLAY_NAME);
+    }
+
     async goto() {
         await this.page.goto('/');
     }
-
 
     async login(){
         await this.page.locator('id=roomId').fill('playwrightRoom');
