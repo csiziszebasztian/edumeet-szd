@@ -1,6 +1,6 @@
 import domready from 'domready';
 import React, { Suspense } from 'react';
-import { render } from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
 import isElectron from 'is-electron';
 
@@ -87,6 +87,8 @@ function run()
 {
 	logger.debug('run() [environment:%s]', process.env.NODE_ENV);
 
+	const container = document.getElementById('edumeet');
+	const root = createRoot(container);
 	const peerId = randomString({ length: 8 }).toLowerCase();
 	const urlParser = new URL(window.location);
 	const parameters = urlParser.searchParams;
@@ -149,7 +151,7 @@ function run()
 
 	if (unsupportedBrowser || webrtcUnavailable)
 	{
-		render(
+		root.render(
 			<Provider store={store}>
 				<MuiThemeProvider theme={theme}>
 					<IntlProvider value={intl}>
@@ -159,8 +161,7 @@ function run()
 						/>
 					</IntlProvider>
 				</MuiThemeProvider>
-			</Provider>,
-			document.getElementById('edumeet')
+			</Provider>
 		);
 
 		return;
@@ -168,15 +169,14 @@ function run()
 
 	if (showConfigDocumentationPath)
 	{
-		render(
+		root.render(
 			<Provider store={store}>
 				<MuiThemeProvider theme={theme}>
 					<IntlProvider value={intl}>
 						<ConfigDocumentation />
 					</IntlProvider>
 				</MuiThemeProvider>
-			</Provider>,
-			document.getElementById('edumeet')
+			</Provider>
 		);
 
 		return;
@@ -184,15 +184,14 @@ function run()
 
 	if (configError)
 	{
-		render(
+		root.render(
 			<Provider store={store}>
 				<MuiThemeProvider theme={theme}>
 					<IntlProvider value={intl}>
 						<ConfigError configError={configError} />
 					</IntlProvider>
 				</MuiThemeProvider>
-			</Provider>,
-			document.getElementById('edumeet')
+			</Provider>
 		);
 
 		return;
@@ -220,7 +219,7 @@ function run()
 
 	global.CLIENT = roomClient;
 
-	render(
+	root.render(
 		<Provider store={store}>
 			<MuiThemeProvider theme={theme}>
 				<IntlProvider value={intl}>
@@ -243,8 +242,7 @@ function run()
 					</PersistGate>
 				</IntlProvider>
 			</MuiThemeProvider>
-		</Provider>,
-		document.getElementById('edumeet')
+		</Provider>
 	);
 }
 
