@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import DOMPurify from 'dompurify';
 import marked from 'marked';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+import Paper from '@mui/material/Paper';
+import Typography from '@mui/material/Typography';
 import { useIntl, FormattedTime } from 'react-intl';
 
 const styles = (theme) =>

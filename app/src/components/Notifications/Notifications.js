@@ -4,11 +4,11 @@ import PropTypes from 'prop-types';
 import { withSnackbar } from 'notistack';
 import * as notificationActions from '../../store/actions/notificationActions';
 import { config } from '../../config';
-import Button from '@material-ui/core/Button';
-import ButtonGroup from '@material-ui/core/ButtonGroup';
-import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
+import Button from '@mui/material/Button';
+import ButtonGroup from '@mui/material/ButtonGroup';
+import VerifiedUserIcon from '@mui/icons-material/VerifiedUser';
 import { FormattedMessage } from 'react-intl';
-import Lock from '@material-ui/icons/Lock';
+import Lock from '@mui/icons-material/Lock';
 class Notifications extends Component
 {
 	displayed = [];

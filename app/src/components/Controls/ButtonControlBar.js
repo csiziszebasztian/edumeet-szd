@@ -6,20 +6,20 @@ import {
 	makePermissionSelector
 } from '../../store/selectors';
 import { permissions } from '../../permissions';
-import { withStyles } from '@material-ui/core/styles';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { withStyles } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import classnames from 'classnames';
 import * as appPropTypes from '../appPropTypes';
 import { withRoomContext } from '../../RoomContext';
 import { useIntl } from 'react-intl';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
-import MicIcon from '@material-ui/icons/Mic';
-import MicOffIcon from '@material-ui/icons/MicOff';
-import VideoIcon from '@material-ui/icons/Videocam';
-import VideoOffIcon from '@material-ui/icons/VideocamOff';
-import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
-import ScreenIcon from '@material-ui/icons/ScreenShare';
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import VideoIcon from '@mui/icons-material/Videocam';
+import VideoOffIcon from '@mui/icons-material/VideocamOff';
+import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice';
+import ScreenIcon from '@mui/icons-material/ScreenShare';
 
 const styles = (theme) =>
 	({

@@ -3,20 +3,20 @@ import { useWindowSize } from '@react-hook/window-size';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import * as appPropTypes from '../appPropTypes';
 import * as roomActions from '../../store/actions/roomActions';
 import { withRoomContext } from '../../RoomContext';
-import FullScreenExitIcon from '@material-ui/icons/FullscreenExit';
+import FullScreenExitIcon from '@mui/icons-material/FullscreenExit';
 import VideoView from './VideoView';
 import ButtonControlBar from '../Controls/ButtonControlBar';
-import IconButton from '@material-ui/core/IconButton';
-import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
-import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
-import KeyboardArrowRightIcon from '@material-ui/icons/KeyboardArrowRight';
-import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
-import useMediaQuery from '@material-ui/core/useMediaQuery';
-import Collapse from '@material-ui/core/Collapse';
+import IconButton from '@mui/material/IconButton';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
+import KeyboardArrowLeftIcon from '@mui/icons-material/KeyboardArrowLeft';
+import KeyboardArrowRightIcon from '@mui/icons-material/KeyboardArrowRight';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import useMediaQuery from '@mui/material/useMediaQuery';
+import Collapse from '@mui/material/Collapse';
 
 const styles = (theme) =>
 	({

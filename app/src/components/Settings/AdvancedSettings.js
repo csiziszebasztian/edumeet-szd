@@ -1,17 +1,17 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { withRoomContext } from '../../RoomContext';
 import * as settingsActions from '../../store/actions/settingsActions';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { useIntl, FormattedMessage } from 'react-intl';
-import MenuItem from '@material-ui/core/MenuItem';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import FormControl from '@material-ui/core/FormControl';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Select from '@material-ui/core/Select';
-import Switch from '@material-ui/core/Switch';
+import MenuItem from '@mui/material/MenuItem';
+import FormHelperText from '@mui/material/FormHelperText';
+import FormControl from '@mui/material/FormControl';
+import FormControlLabel from '@mui/material/FormControlLabel';
+import Select from '@mui/material/Select';
+import Switch from '@mui/material/Switch';
 import { config } from '../../config';
 
 const styles = (theme) =>

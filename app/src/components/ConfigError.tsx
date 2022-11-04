@@ -1,14 +1,14 @@
 import React from 'react'; // eslint-disable-line no-use-before-define
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
 
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogContent from '@material-ui/core/DialogContent';
-import Grid from '@material-ui/core/Grid';
-import ErrorIcon from '@material-ui/icons/Error';
-import Button from '@material-ui/core/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogContent from '@mui/material/DialogContent';
+import Grid from '@mui/material/Grid';
+import ErrorIcon from '@mui/icons-material/Error';
+import Button from '@mui/material/Button';
 
 const styles = () =>
 	({

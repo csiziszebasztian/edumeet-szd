@@ -1,10 +1,10 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import { withRoomContext } from '../../../RoomContext';
 import { useIntl, FormattedMessage } from 'react-intl';
-import Button from '@material-ui/core/Button';
+import Button from '@mui/material/Button';
 
 const styles = (theme) =>
 	({

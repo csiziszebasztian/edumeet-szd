@@ -2,18 +2,18 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withRoomContext } from '../../../../../RoomContext';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { useIntl, FormattedTime, FormattedMessage } from 'react-intl';
 import magnet from 'magnet-uri';
-import Typography from '@material-ui/core/Typography';
-import IconButton from '@material-ui/core/IconButton';
-import DescriptionIcon from '@material-ui/icons/Description';
-import Paper from '@material-ui/core/Paper';
+import Typography from '@mui/material/Typography';
+import IconButton from '@mui/material/IconButton';
+import DescriptionIcon from '@mui/icons-material/Description';
+import Paper from '@mui/material/Paper';
 import classnames from 'classnames';
-import SaveIcon from '@material-ui/icons/Save';
-import GetAppIcon from '@material-ui/icons/GetApp';
-import Tooltip from '@material-ui/core/Tooltip';
-import Alert from '@material-ui/lab/Alert';
+import SaveIcon from '@mui/icons-material/Save';
+import GetAppIcon from '@mui/icons-material/GetApp';
+import Tooltip from '@mui/material/Tooltip';
+import Alert from '@mui/lab/Alert';
 
 const styles = (theme) =>
 	({

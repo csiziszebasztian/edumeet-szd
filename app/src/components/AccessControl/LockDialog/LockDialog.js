@@ -6,19 +6,19 @@ import {
 } from '../../../store/selectors';
 import { permissions } from '../../../permissions';
 import * as appPropTypes from '../../appPropTypes';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { withRoomContext } from '../../../RoomContext';
 import * as roomActions from '../../../store/actions/roomActions';
 import PropTypes from 'prop-types';
 import { FormattedMessage } from 'react-intl';
-import Dialog from '@material-ui/core/Dialog';
-import DialogTitle from '@material-ui/core/DialogTitle';
-import DialogActions from '@material-ui/core/DialogActions';
-import DialogContent from '@material-ui/core/DialogContent';
-import DialogContentText from '@material-ui/core/DialogContentText';
-import Button from '@material-ui/core/Button';
-import List from '@material-ui/core/List';
-import ListSubheader from '@material-ui/core/ListSubheader';
+import Dialog from '@mui/material/Dialog';
+import DialogTitle from '@mui/material/DialogTitle';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import Button from '@mui/material/Button';
+import List from '@mui/material/List';
+import ListSubheader from '@mui/material/ListSubheader';
 import ListLobbyPeer from './ListLobbyPeer';
 
 const styles = (theme) =>

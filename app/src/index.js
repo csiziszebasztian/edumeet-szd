@@ -21,7 +21,7 @@ import ConfigError from './components/ConfigError';
 import JoinDialog from './components/JoinDialog';
 import LoginDialog from './components/AccessControl/LoginDialog';
 import LoadingView from './components/Loader/LoadingView';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { ThemeProvider, createTheme, StyledEngineProvider } from '@mui/material/styles';
 import { PersistGate } from 'redux-persist/lib/integration/react';
 import { persistor, store } from './store/store';
 import { SnackbarProvider } from 'notistack';
@@ -67,7 +67,7 @@ let roomClient;
 
 RoomClient.init({ store });
 
-const theme = createMuiTheme(config.theme);
+const theme = createTheme(config.theme);
 
 let Router;
 
@@ -153,14 +153,16 @@ function run()
 	{
 		root.render(
 			<Provider store={store}>
-				<MuiThemeProvider theme={theme}>
-					<IntlProvider value={intl}>
-						<UnsupportedBrowser
-							webrtcUnavailable={webrtcUnavailable}
-							platform={device.platform}
-						/>
-					</IntlProvider>
-				</MuiThemeProvider>
+				<StyledEngineProvider injectFirst>
+					<ThemeProvider theme={theme}>
+						<IntlProvider value={intl}>
+							<UnsupportedBrowser
+								webrtcUnavailable={webrtcUnavailable}
+								platform={device.platform}
+							/>
+						</IntlProvider>
+					</ThemeProvider>
+				</StyledEngineProvider>
 			</Provider>
 		);
 
@@ -171,11 +173,13 @@ function run()
 	{
 		root.render(
 			<Provider store={store}>
-				<MuiThemeProvider theme={theme}>
-					<IntlProvider value={intl}>
-						<ConfigDocumentation />
-					</IntlProvider>
-				</MuiThemeProvider>
+				<StyledEngineProvider injectFirst>
+					<ThemeProvider theme={theme}>
+						<IntlProvider value={intl}>
+							<ConfigDocumentation />
+						</IntlProvider>
+					</ThemeProvider>
+				</StyledEngineProvider>
 			</Provider>
 		);
 
@@ -186,11 +190,13 @@ function run()
 	{
 		root.render(
 			<Provider store={store}>
-				<MuiThemeProvider theme={theme}>
-					<IntlProvider value={intl}>
-						<ConfigError configError={configError} />
-					</IntlProvider>
-				</MuiThemeProvider>
+				<StyledEngineProvider injectFirst>
+					<ThemeProvider theme={theme}>
+						<IntlProvider value={intl}>
+							<ConfigError configError={configError} />
+						</IntlProvider>
+					</ThemeProvider>
+				</StyledEngineProvider>
 			</Provider>
 		);
 
@@ -221,27 +227,29 @@ function run()
 
 	root.render(
 		<Provider store={store}>
-			<MuiThemeProvider theme={theme}>
-				<IntlProvider value={intl}>
-					<PersistGate loading={<LoadingView />} persistor={persistor}>
-						<RoomContext.Provider value={roomClient}>
-							<SnackbarProvider>
-								<Router basename={basePath}>
-									<Suspense fallback={<LoadingView />}>
-										<React.Fragment>
-											<Switch>
-												<Route exact path='/' component={JoinDialog} />
-												<Route exact path='/login_dialog' component={LoginDialog} />
-												<Route path='/:id' component={App} />
-											</Switch>
-										</React.Fragment>
-									</Suspense>
-								</Router>
-							</SnackbarProvider>
-						</RoomContext.Provider>
-					</PersistGate>
-				</IntlProvider>
-			</MuiThemeProvider>
+			<StyledEngineProvider injectFirst>
+				<ThemeProvider theme={theme}>
+					<IntlProvider value={intl}>
+						<PersistGate loading={<LoadingView />} persistor={persistor}>
+							<RoomContext.Provider value={roomClient}>
+								<SnackbarProvider>
+									<Router basename={basePath}>
+										<Suspense fallback={<LoadingView />}>
+											<React.Fragment>
+												<Switch>
+													<Route exact path='/' component={JoinDialog} />
+													<Route exact path='/login_dialog' component={LoginDialog} />
+													<Route path='/:id' component={App} />
+												</Switch>
+											</React.Fragment>
+										</Suspense>
+									</Router>
+								</SnackbarProvider>
+							</RoomContext.Provider>
+						</PersistGate>
+					</IntlProvider>
+				</ThemeProvider>
+			</StyledEngineProvider>
 		</Provider>
 	);
 }

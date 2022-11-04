@@ -7,24 +7,24 @@ import {
 } from '../../store/selectors';
 import { permissions } from '../../permissions';
 import { withRoomContext } from '../../RoomContext';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import * as appPropTypes from '../appPropTypes';
 import { useIntl, FormattedMessage } from 'react-intl';
 import VideoView from '../VideoContainers/VideoView';
 import Volume from './Volume';
-import Fab from '@material-ui/core/Fab';
-import Tooltip from '@material-ui/core/Tooltip';
-import MicIcon from '@material-ui/icons/Mic';
-import MicOffIcon from '@material-ui/icons/MicOff';
-import VideoIcon from '@material-ui/icons/Videocam';
-import VideoOffIcon from '@material-ui/icons/VideocamOff';
-import ScreenIcon from '@material-ui/icons/ScreenShare';
-import SettingsVoiceIcon from '@material-ui/icons/SettingsVoice';
-import MoreHorizIcon from '@material-ui/icons/MoreHoriz';
-import Menu from '@material-ui/core/Menu';
-import MenuItem from '@material-ui/core/MenuItem';
+import Fab from '@mui/material/Fab';
+import Tooltip from '@mui/material/Tooltip';
+import MicIcon from '@mui/icons-material/Mic';
+import MicOffIcon from '@mui/icons-material/MicOff';
+import VideoIcon from '@mui/icons-material/Videocam';
+import VideoOffIcon from '@mui/icons-material/VideocamOff';
+import ScreenIcon from '@mui/icons-material/ScreenShare';
+import SettingsVoiceIcon from '@mui/icons-material/SettingsVoice';
+import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 
 const styles = (theme) =>
 	({

@@ -1,11 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import classnames from 'classnames';
 import FullScreen from '../FullScreen';
-import FullScreenIcon from '@material-ui/icons/Fullscreen';
-import FullScreenExitIcon from '@material-ui/icons/FullscreenExit';
+import FullScreenIcon from '@mui/icons-material/Fullscreen';
+import FullScreenExitIcon from '@mui/icons-material/FullscreenExit';
 
 const styles = (theme) =>
 	({

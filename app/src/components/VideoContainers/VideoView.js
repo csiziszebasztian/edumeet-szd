@@ -1,15 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import EditableInput from '../Controls/EditableInput';
 import Logger from '../../Logger';
-import { yellow, orange, red } from '@material-ui/core/colors';
-import SignalCellularOffIcon from '@material-ui/icons/SignalCellularOff';
-import SignalCellular0BarIcon from '@material-ui/icons/SignalCellular0Bar';
-import SignalCellular1BarIcon from '@material-ui/icons/SignalCellular1Bar';
-import SignalCellular2BarIcon from '@material-ui/icons/SignalCellular2Bar';
-import SignalCellular3BarIcon from '@material-ui/icons/SignalCellular3Bar';
+import { yellow, orange, red } from '@mui/material/colors';
+import SignalCellularOffIcon from '@mui/icons-material/SignalCellularOff';
+import SignalCellular0BarIcon from '@mui/icons-material/SignalCellular0Bar';
+import SignalCellular1BarIcon from '@mui/icons-material/SignalCellular1Bar';
+import SignalCellular2BarIcon from '@mui/icons-material/SignalCellular2Bar';
+import SignalCellular3BarIcon from '@mui/icons-material/SignalCellular3Bar';
 import { AudioAnalyzer } from './AudioAnalyzer';
 
 const logger = new Logger('VideoView');

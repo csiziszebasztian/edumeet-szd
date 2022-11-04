@@ -1,20 +1,20 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import PropTypes from 'prop-types';
 import classnames from 'classnames';
 import { withRoomContext } from '../../../RoomContext';
 import { useIntl } from 'react-intl';
 import { permissions } from '../../../permissions';
 import { makePermissionSelector } from '../../../store/selectors';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
-import IconButton from '@material-ui/core/IconButton';
-import ListItemAvatar from '@material-ui/core/ListItemAvatar';
-import Avatar from '@material-ui/core/Avatar';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import IconButton from '@mui/material/IconButton';
+import ListItemAvatar from '@mui/material/ListItemAvatar';
+import Avatar from '@mui/material/Avatar';
 import EmptyAvatar from '../../../images/avatar-empty.jpeg';
-import PromoteIcon from '@material-ui/icons/OpenInBrowser';
-import Tooltip from '@material-ui/core/Tooltip';
+import PromoteIcon from '@mui/icons-material/OpenInBrowser';
+import Tooltip from '@mui/material/Tooltip';
 
 const styles = () =>
 	({

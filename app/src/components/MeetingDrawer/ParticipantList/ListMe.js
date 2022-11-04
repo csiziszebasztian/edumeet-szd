@@ -1,14 +1,14 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { withRoomContext } from '../../../RoomContext';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';
 import * as appPropTypes from '../../appPropTypes';
 import { useIntl } from 'react-intl';
-import IconButton from '@material-ui/core/IconButton';
-import Tooltip from '@material-ui/core/Tooltip';
-import PanIcon from '@material-ui/icons/PanTool';
+import IconButton from '@mui/material/IconButton';
+import Tooltip from '@mui/material/Tooltip';
+import PanIcon from '@mui/icons-material/PanTool';
 import EmptyAvatar from '../../../images/avatar-empty.jpeg';
 
 const styles = (theme) =>

@@ -1,30 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { withRoomContext } from '../../../../RoomContext';
 import { useIntl } from 'react-intl';
 import { permissions } from '../../../../permissions';
 import { makePermissionSelector } from '../../../../store/selectors';
-import Paper from '@material-ui/core/Paper';
-import { Grid } from '@material-ui/core';
+import Paper from '@mui/material/Paper';
+import { Grid } from '@mui/material';
 import { EditorState, RichUtils, ContentState } from 'draft-js';
 import Editor from 'draft-js-plugins-editor';
 import createSingleLinePlugin from 'draft-js-single-line-plugin';
 import { stateToHTML } from 'draft-js-export-html';
 import 'draft-js/dist/Draft.css';
-import Divider from '@material-ui/core/Divider';
-import Tooltip from '@material-ui/core/Tooltip';
+import Divider from '@mui/material/Divider';
+import Tooltip from '@mui/material/Tooltip';
 
-import IconButton from '@material-ui/core/IconButton';
-import SendIcon from '@material-ui/icons/Send';
-import AttachFileIcon from '@material-ui/icons/AttachFile';
-import PhotoCamera from '@material-ui/icons/PhotoCamera';
-import SaveIcon from '@material-ui/icons/Save';
-import FormatBoldIcon from '@material-ui/icons/FormatBold';
-import FormatItalicIcon from '@material-ui/icons/FormatItalic';
-import FormatUnderlinedIcon from '@material-ui/icons/FormatUnderlined';
-import SortIcon from '@material-ui/icons/Sort';
+import IconButton from '@mui/material/IconButton';
+import SendIcon from '@mui/icons-material/Send';
+import AttachFileIcon from '@mui/icons-material/AttachFile';
+import PhotoCamera from '@mui/icons-material/PhotoCamera';
+import SaveIcon from '@mui/icons-material/Save';
+import FormatBoldIcon from '@mui/icons-material/FormatBold';
+import FormatItalicIcon from '@mui/icons-material/FormatItalic';
+import FormatUnderlinedIcon from '@mui/icons-material/FormatUnderlined';
+import SortIcon from '@mui/icons-material/Sort';
 
 const styles = (theme) => ({
 	root :

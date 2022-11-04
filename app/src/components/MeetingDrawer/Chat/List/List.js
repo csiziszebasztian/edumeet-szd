@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { withStyles } from '@mui/styles';
 import { injectIntl, FormattedMessage } from 'react-intl';
 import * as appPropTypes from '../../../appPropTypes';
 import * as chatActions from '../../../../store/actions/chatActions';
@@ -9,8 +9,8 @@ import classnames from 'classnames';
 import Message from './Item/Message';
 import File from './Item/File';
 import EmptyAvatar from '../../../../images/avatar-empty.jpeg';
-import Button from '@material-ui/core/Button';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import Button from '@mui/material/Button';
+import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 
 const styles = (theme) =>
 	({
