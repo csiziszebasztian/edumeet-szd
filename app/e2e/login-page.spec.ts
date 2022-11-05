@@ -17,7 +17,7 @@ test('Browser title', async ({ page }) => {
 test('Join is disabled when no name', async ({ page }) => {
 
   const edumeetPage = new EdummetPage(page);
-  const joinButton = edumeetPage.getJoinButton();
+  const joinButton = edumeetPage.getJoinButton;
 
   await expect(joinButton).toBeVisible();
   await expect(joinButton).toBeDisabled();
@@ -29,8 +29,8 @@ test('Join become enable when fill name', async ({ page }) => {
 
   const edumeetPage = new EdummetPage(page);
 
-  const joinButton = edumeetPage.getJoinButton();
-  const dispalyName = edumeetPage.getDisplayName();
+  const joinButton = edumeetPage.getJoinButton;
+  const dispalyName = edumeetPage.getDisplayName;
 
   await expect(dispalyName).toBeVisible();
   await dispalyName.fill('TestName');
@@ -48,7 +48,9 @@ test('Join become enable when fill name', async ({ page }) => {
 
 test('Room name',async ({page}) => {
 
-  const roomId = page.locator('id=roomId');
+  const edumeetPage = new EdummetPage(page);
+
+  const roomId = edumeetPage.getRoomId;
   await expect(roomId).not.toBeEmpty();
 
   const roomIdValue = await roomId.getAttribute('value');
@@ -61,8 +63,10 @@ test('Room name',async ({page}) => {
 
 test('Media buttons',async ({page}) => {
 
-  const micCamToggleButton = page.locator('data-testid=mic-cam-toggleButton');
-  const camToggleButton = page.locator('data-testid=cam-toggleButton');
+  const edumeetPage = new EdummetPage(page);
+
+  const micCamToggleButton = edumeetPage.getMicCamToggleButton;
+  const camToggleButton = edumeetPage.getCamToggleButton;
   let camMicButtonPressed = await micCamToggleButton.getAttribute('aria-pressed');
   let camButtonPressed = await camToggleButton.getAttribute('aria-pressed');
 
@@ -149,8 +153,10 @@ test('Test Disable tooltip',async ({page}) => {
 
 test('Test localization',async ({page}) => {
 
-  const localeButton = page.locator('data-testid=localeButton');
-  const joinButton = page.locator('id=joinButton');
+  const edummetPage = new EdummetPage(page);
+
+  const localeButton = edummetPage.getLocaleButton;
+  const joinButton = edummetPage.getJoinButton;
   await expect(joinButton).toContainText('Join');
   await localeButton.click();
   const hunButton = page.locator('text=Hungarian');
