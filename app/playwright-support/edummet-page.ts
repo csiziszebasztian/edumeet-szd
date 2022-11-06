@@ -29,7 +29,7 @@ export class EdummetPage {
 
     //Login-locatores
     private readonly joinButton: Locator;
-    private readonly displayname: Locator;
+    private readonly displayName: Locator;
     private readonly roomId: Locator;
     private readonly micCamToggleButton: Locator;
     private readonly camToggleButton: Locator;
@@ -56,7 +56,7 @@ export class EdummetPage {
 
         //Login-locators
         this.joinButton = this.page.locator('id=joinButton');
-        this.displayname = this.page.locator('id=displayname');
+        this.displayName = this.page.locator('id=displayname');
         this.roomId = this.page.locator('id=roomId');
         this.micCamToggleButton = this.page.locator('data-testid=mic-cam-toggleButton');
         this.camToggleButton = this.page.locator('data-testid=cam-toggleButton');
@@ -83,7 +83,7 @@ export class EdummetPage {
     }
 
     get getDisplayName() : Locator {
-        return this.displayname;
+        return this.displayName;
     }
 
     get getRoomId() : Locator {
@@ -143,9 +143,9 @@ export class EdummetPage {
     }
 
     async login(){
-        await this.page.locator('id=roomId').fill('playwrightRoom');
-        await this.page.locator('id=displayname').fill('testUser1');
-        await this.page.locator('id=joinButton').click();
+        await this.roomId.fill('playwrightRoom');
+        await this.displayName.fill('testUser1');
+        await this.joinButton.click();
     }
 
 
