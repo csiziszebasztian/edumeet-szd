@@ -18,6 +18,9 @@ import Notifications from './Notifications/Notifications';
 import MeetingDrawer from './MeetingDrawer/MeetingDrawer';
 import Democratic from './MeetingViews/Democratic';
 import Filmstrip from './MeetingViews/Filmstrip';
+import L1 from './MeetingViews/L1';
+import FilmstripSlider from './MeetingViews/FilmstripSlider';
+import Round from './MeetingViews/Round';
 import AudioPeers from './PeerAudio/AudioPeers';
 import FullScreenView from './VideoContainers/FullScreenView';
 import VideoWindow from './VideoWindow/VideoWindow';
@@ -181,8 +184,14 @@ class Room extends React.PureComponent
 
 		const View =
 		{
-			filmstrip  : Filmstrip,
-			democratic : Democratic
+			filmstrip      : Filmstrip,
+			democratic     : Democratic,
+			filmstripup    : FilmstripSlider,
+			filmstripdown  : FilmstripSlider,
+			filmstripleft  : FilmstripSlider,
+			filmstripright : FilmstripSlider,
+			l1             : L1,
+			round          : Round
 		}[room.mode];
 
 		const container = window !== undefined ? window.document.body : undefined;
@@ -266,7 +275,7 @@ class Room extends React.PureComponent
 					<WakeLock />
 				}
 
-				<View advancedMode={advancedMode} />
+				<View advancedMode={advancedMode} mode={room.mode}/>
 
 				{ (buttonControlBar || room.hideSelfView) &&
 					<ButtonControlBar />
