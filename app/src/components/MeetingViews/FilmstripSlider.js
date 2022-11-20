@@ -312,44 +312,19 @@ class FilmstripSlider extends React.PureComponent
 		const peerIdList = Object.keys(peers);
 		const newSpotlights = [ ...spotlights ];
 
-		function alreadySpotlight(sl, p, i)
-		{
-			return sl.includes((obj) => obj === p[i]);
-		}
-
-		function isIndexOut(index)
-		{
-			return index < 0;
-		}
-
 		if (peerIdList.length > spotlights.length)
 		{
 
 			let peerIndex = peerIdList.findIndex(
 				(peerElement) => peerElement === spotlights[0]);
 
-			let notFinde = true;
+			peerIndex = (peerIndex || peerIdList.length) - 1;
 
-			while (notFinde)
-			{
+			newSpotlights.shift();
 
-				peerIndex--;
+			newSpotlights.push(peerIdList[peerIndex]);
 
-				if (isIndexOut(peerIndex))
-				{
-					peerIndex=(peerIdList.length-1);
-				}
-
-				if (!alreadySpotlight(spotlights, peerIdList, peerIndex))
-				{
-					notFinde=false;
-
-					newSpotlights.shift();
-
-					newSpotlights.push(peerIdList[peerIndex]);
-					roomClient.updateSpotlights(newSpotlights);
-				}
-			}
+			roomClient.updateSpotlights(newSpotlights);
 		}
 	}
 
@@ -367,44 +342,18 @@ class FilmstripSlider extends React.PureComponent
 		const peerIdList = Object.keys(peers);
 		const newSpotlights = [ ...spotlights ];
 
-		function alreadySpotlight(sl, p, i)
-		{
-			return sl.includes((obj) => obj === p[i]);
-		}
-
-		function isIndexOut(index)
-		{
-			return index > spotlights.length;
-		}
-
 		if (peerIdList.length > spotlights.length)
 		{
 
 			let peerIndex = peerIdList.findIndex(
 				(peerElement) => peerElement === spotlights.at(-1));
 
-			let notFinde = true;
+			peerIndex = (peerIndex + 1) % peerIdList.length;
 
-			while (notFinde)
-			{
+			newSpotlights.pop();
 
-				peerIndex++;
-
-				if (isIndexOut(peerIndex))
-				{
-					peerIndex=0;
-				}
-
-				if (!alreadySpotlight(spotlights, peerIdList, peerIndex))
-				{
-					notFinde=false;
-
-					newSpotlights.pop();
-
-					newSpotlights.unshift(peerIdList[peerIndex]);
-					roomClient.updateSpotlights(newSpotlights);
-				}
-			}
+			newSpotlights.unshift(peerIdList[peerIndex]);
+			roomClient.updateSpotlights(newSpotlights);
 		}
 	}
 
