@@ -219,7 +219,7 @@ const mapStateToProps = (state) =>
 {
 	return {
 		boxes            : videoBoxesSelector(state),
-		spotlightsPeers  : spotlightPeersSelector(state),
+		spotlightsPeers  : state.room.spotlights,
 		toolbarsVisible  : state.room.toolbarsVisible,
 		hideSelfView     : state.room.hideSelfView,
 		permanentTopBar  : state.settings.permanentTopBar,
