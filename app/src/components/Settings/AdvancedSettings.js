@@ -13,6 +13,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Select from '@material-ui/core/Select';
 import Switch from '@material-ui/core/Switch';
 import { config } from '../../config';
+import TransferList from './TransferList';
 
 const styles = (theme) =>
 	({
@@ -98,6 +99,7 @@ const AdvancedSettings = ({
 					</FormControl>
 				</form>
 			}
+			<TransferList/>
 		</React.Fragment>
 	);
 };
