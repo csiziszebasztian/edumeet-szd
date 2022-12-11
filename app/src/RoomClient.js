@@ -5144,4 +5144,18 @@ export default class RoomClient
 	{
 		this._spotlights.hideNoVideoParticipants = hideNoVideoParticipants;
 	}
+
+	spotlightsIsFull()
+	{
+		logger.error('spotlightsIsFull(spotlightLenght) [error:"%o"]');
+
+		store.dispatch(requestActions.notify(
+			{
+				type : 'error',
+				text : intl.formatMessage({
+					id             : 'spotlightIsFull',
+					defaultMessage : 'Spotlight is full. Remove some peer or raise the number of visible videos.'
+				})
+			}));
+	}
 }
