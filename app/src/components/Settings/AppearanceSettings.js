@@ -71,6 +71,42 @@ const AppearanceSettings = (props) =>
 			id             : 'label.filmstrip',
 			defaultMessage : 'Filmstrip view'
 		})
+	}, {
+		value : 'filmstripdown',
+		label : intl.formatMessage({
+			id             : 'label.filmstripdown',
+			defaultMessage : 'Filmstrip Down view'
+		})
+	}, {
+		value : 'filmstripup',
+		label : intl.formatMessage({
+			id             : 'label.filmstripup',
+			defaultMessage : 'Filmstrip Up view'
+		})
+	}, {
+		value : 'filmstripleft',
+		label : intl.formatMessage({
+			id             : 'label.filmstripleft',
+			defaultMessage : 'Filmstrip Left view'
+		})
+	}, {
+		value : 'filmstripright',
+		label : intl.formatMessage({
+			id             : 'label.filmstripright',
+			defaultMessage : 'Filmstrip Right view'
+		})
+	}, {
+		value : 'l1',
+		label : intl.formatMessage({
+			id             : 'label.l1',
+			defaultMessage : 'L1 view'
+		})
+	}, {
+		value : 'round',
+		label : intl.formatMessage({
+			id             : 'label.round',
+			defaultMessage : 'Round view'
+		})
 	} ];
 
 	return (
