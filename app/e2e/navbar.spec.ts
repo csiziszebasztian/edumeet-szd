@@ -10,16 +10,20 @@ test.beforeEach(async ({ page }, testInfo) => {
 test.describe('Leave button', async () => {
 
   test('Standard test',async ({page}) => {
-    const leaveButton = page.locator('data-testid=leaveButton');
+    const edumeetPage = new EdummetPage(page);
+    const leaveButton = edumeetPage.getLeaveButton;
     await expect(leaveButton).toBeVisible();
     await expect(leaveButton).toHaveText('Leave');
     await expect(leaveButton).toBeEnabled();
   });
 
   test('Click but not leave',async ({page}) => {
-    const leaveButton = page.locator('data-testid=leaveButton');
-    const leaveDialog = page.locator('data-testid=leaveDialog');
-    const leaveDialogNo = page.locator('data-testid=leaveDialogNo');
+
+    const edumeetPage = new EdummetPage(page);
+    const leaveButton = edumeetPage.getLeaveButton;
+    const leaveDialog = edumeetPage.getLeaveDialog;
+    const leaveDialogNo = edumeetPage.getLeaveDialogNo;
+
     await expect(leaveDialog).not.toBeVisible();
     await leaveButton.click();
     await expect(leaveDialog).toBeVisible();
@@ -28,10 +32,12 @@ test.describe('Leave button', async () => {
   });
 
   test('Click and leave',async ({page}) => {
-    const leaveButton = page.locator('data-testid=leaveButton');
-    const leaveDialog = page.locator('data-testid=leaveDialog');
-    const leaveDialogYes = page.locator('data-testid=leaveDialogYes');
-    const loginDialog = page.locator('data-testid=loginDialog');
+    const edumeetPage = new EdummetPage(page);
+    const leaveButton = edumeetPage.getLeaveButton;
+    const leaveDialog = edumeetPage.getLeaveDialog;
+    const leaveDialogYes = edumeetPage.getLeaveDialogYes;
+    const loginDialog = edumeetPage.getLoginDialog;
+    
     await expect(leaveDialog).not.toBeVisible();
     await leaveButton.click();
     await expect(leaveDialog).toBeVisible();
