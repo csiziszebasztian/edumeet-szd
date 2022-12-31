@@ -173,9 +173,6 @@ class L1 extends React.PureComponent
 			(availableWidth - L1_PADDING_H)
 		)
 		{
-			/* eslint-disable no-console */
-			console.log('Test1');
-			/* eslint-enable no-console */
 			L1Width = (availableWidth - L1_PADDING_H) /
 				boxes;
 			L1Height = L1Width / aspectRatio;
@@ -287,11 +284,8 @@ class L1 extends React.PureComponent
 						/>
 					}
 				</div>
-
-				{ Object.keys(peers).map((peerId) =>
 				{
-
-					if (spotlights.find((spotlightsElement) => spotlightsElement === peerId))
+					spotlights.map((peerId) =>
 					{
 
 						return (
@@ -311,12 +305,8 @@ class L1 extends React.PureComponent
 								/>
 							</div>
 						);
-					}
-					else
-					{
-						return ('');
-					}
-				})}
+					})
+				}
 			</div>
 		);
 	}

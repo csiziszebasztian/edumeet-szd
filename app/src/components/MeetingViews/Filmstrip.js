@@ -323,10 +323,8 @@ class Filmstrip extends React.PureComponent
 								}
 							</div>
 						</Grid>
-
-						{ Object.keys(peers).map((peerId) =>
 						{
-							if (spotlights.find((spotlightsElement) => spotlightsElement === peerId))
+							spotlights.map((peerId) =>
 							{
 								return (
 									<Grid key={peerId} item>
@@ -346,12 +344,8 @@ class Filmstrip extends React.PureComponent
 										</div>
 									</Grid>
 								);
-							}
-							else
-							{
-								return ('');
-							}
-						})}
+							})
+						}
 					</Grid>
 				</div>
 			</div>
