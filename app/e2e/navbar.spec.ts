@@ -50,9 +50,12 @@ test.describe('Leave button', async () => {
 });
 
 test('Local menu',async ({page}) => {
-  
-  const localButton = page.locator('data-testid=localeButton');
-  const leaveButton = page.locator('data-testid=leaveButton');
+
+  const edumeetPage = new EdummetPage(page);
+
+  const localButton = edumeetPage.getLocaleButton;;
+  const leaveButton = edumeetPage.getLeaveButton;
+
   await expect(leaveButton).toContainText('Leave');
   await localButton.click();
 
@@ -64,8 +67,10 @@ test('Local menu',async ({page}) => {
 
 
 test('Lock room button test',async ({page}) => {
+
+  const edumeetPage = new EdummetPage(page);
   
-  const lockRoomButton = page.locator('data-testid=lockRoomButton');
+  const lockRoomButton = edumeetPage.getLockRoomButton;
   const tooltip = page.locator('role=tooltip');
   
   await expect(lockRoomButton).toBeVisible();
@@ -80,9 +85,11 @@ test('Lock room button test',async ({page}) => {
 
 
 test('Setting button test',async ({page}) => {
+
+  const edumeetPage = new EdummetPage(page);
   
-  const settingButton = page.locator('data-testid=settingsButton');
-  const settingDialog = page.locator('data-testid=settingDialog');
+  const settingButton = edumeetPage.getSettingsButton;
+  const settingDialog = edumeetPage.getSettingDialog;
   const tooltip = page.locator('role=tooltip');
   
   await expect(settingButton).toBeVisible();
@@ -100,9 +107,11 @@ test('Setting button test',async ({page}) => {
 });
 
 test('Participants button test',async ({page}) => {
+
+  const edumeetPage = new EdummetPage(page);
   
-  const participantsButton = page.locator('data-testid=participantsButton');
-  const drawer = page.locator('data-testid=drawerRaiseHand');
+  const participantsButton = edumeetPage.getParticipantsButton;
+  const drawer = edumeetPage.getDrawerRaiseHand;
   const tooltip = page.locator('role=tooltip');
   
   await expect(participantsButton).toBeVisible();

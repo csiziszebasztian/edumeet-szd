@@ -47,6 +47,11 @@ export class EdummetPage {
     private readonly leaveDialog: Locator;
     private readonly leaveDialogNo: Locator;
     private readonly leaveDialogYes: Locator;
+    private readonly lockRoomButton: Locator;
+    private readonly settingsButton: Locator;
+    private readonly settingDialog: Locator;
+    private readonly participantsButton: Locator;
+    private readonly drawerRaiseHand: Locator;
 
 
 
@@ -74,7 +79,11 @@ export class EdummetPage {
         this.leaveDialog = this.page.locator('data-testid=leaveDialog');
         this.leaveDialogNo = this.page.locator('data-testid=leaveDialogNo');
         this.leaveDialogYes = this.page.locator('data-testid=leaveDialogYes');
-
+        this.lockRoomButton = this.page.locator('data-testid=lockRoomButton');
+        this.settingsButton = this.page.locator('data-testid=settingsButton');
+        this.settingDialog = this.page.locator('data-testid=settingDialog');
+        this.participantsButton = this.page.locator('data-testid=participantsButton');
+        this.drawerRaiseHand = this.page.locator('data-testid=drawerRaiseHand');
     }
 
     get getJoinButton() : Locator {
@@ -137,6 +146,26 @@ export class EdummetPage {
         return this.leaveDialogYes;
     }
 
+    get getLockRoomButton() : Locator {
+        return this.lockRoomButton;
+    }
+
+    get getSettingsButton() : Locator {
+        return this.settingsButton;
+    }
+
+    get getSettingDialog() : Locator {
+        return this.settingDialog;
+    }
+
+    get getParticipantsButton() : Locator {
+        return this.participantsButton
+    }
+
+    get getDrawerRaiseHand() : Locator {
+        return this.drawerRaiseHand;
+    }
+
     async goto() {
         await this.page.goto('/');
     }
@@ -153,7 +182,7 @@ export class EdummetPage {
         await this.page.locator(loginDate.joinLocator).click();
     }
 
-    async tooltipTest(tooltipData: TooltipData ) {
+    async tooltipTest(tooltipData: TooltipData) {
 
         const parentTooltip = this.page.locator(tooltipData.parentTooltipLocator);
 
@@ -165,15 +194,5 @@ export class EdummetPage {
         const tooltip = this.page.locator(tooltipData.toolTipLocator);
         await expect(tooltip).toBeVisible();
         await expect(tooltip).toHaveText(tooltipData.tooltipText);
-    }
-
-    async localizationTest() {
-        const localeButton = this.page.locator('data-testid=localeButton');
-        const joinButton = this.page.locator('id=joinButton');
-        await expect(joinButton).toContainText('Join');
-        await localeButton.click();
-        const hunButton = this.page.locator('text=Hungarian');
-        await hunButton.click();
-        await expect(joinButton).toContainText('Kapcsolódás');
     }
 };
