@@ -207,37 +207,35 @@ const SpeakerPeer = (props) =>
 						</div>
 					}
 
-					{ screenVisible &&
-						<div className={classnames(classes.viewContainer)} style={style}>
-							<VideoView
-								advancedMode={advancedMode}
-								videoContain
-								consumerSpatialLayers={
-									screenConsumer ? screenConsumer.spatialLayers : null
-								}
-								consumerTemporalLayers={
-									screenConsumer ? screenConsumer.temporalLayers : null
-								}
-								consumerCurrentSpatialLayer={
-									screenConsumer ? screenConsumer.currentSpatialLayer : null
-								}
-								consumerCurrentTemporalLayer={
-									screenConsumer ? screenConsumer.currentTemporalLayer : null
-								}
-								consumerPreferredSpatialLayer={
-									screenConsumer ? screenConsumer.preferredSpatialLayer : null
-								}
-								consumerPreferredTemporalLayer={
-									screenConsumer ? screenConsumer.preferredTemporalLayer : null
-								}
-								videoMultiLayer={screenConsumer && screenConsumer.type !== 'simple'}
-								videoTrack={screenConsumer && screenConsumer.track}
-								videoVisible={screenVisible}
-								videoCodec={screenConsumer && screenConsumer.codec}
-								videoScore={screenConsumer ? screenConsumer.score : null}
-							/>
-						</div>
-					}
+					<div className={classnames(classes.viewContainer)} style={style}>
+						<VideoView
+							advancedMode={advancedMode}
+							videoContain
+							consumerSpatialLayers={
+								screenConsumer ? screenConsumer.spatialLayers : null
+							}
+							consumerTemporalLayers={
+								screenConsumer ? screenConsumer.temporalLayers : null
+							}
+							consumerCurrentSpatialLayer={
+								screenConsumer ? screenConsumer.currentSpatialLayer : null
+							}
+							consumerCurrentTemporalLayer={
+								screenConsumer ? screenConsumer.currentTemporalLayer : null
+							}
+							consumerPreferredSpatialLayer={
+								screenConsumer ? screenConsumer.preferredSpatialLayer : null
+							}
+							consumerPreferredTemporalLayer={
+								screenConsumer ? screenConsumer.preferredTemporalLayer : null
+							}
+							videoMultiLayer={screenConsumer && screenConsumer.type !== 'simple'}
+							videoTrack={screenConsumer && screenConsumer.track}
+							videoVisible={screenVisible}
+							videoCodec={screenConsumer && screenConsumer.codec}
+							videoScore={screenConsumer ? screenConsumer.score : null}
+						/>
+					</div>
 				</div>
 			}
 		</React.Fragment>
