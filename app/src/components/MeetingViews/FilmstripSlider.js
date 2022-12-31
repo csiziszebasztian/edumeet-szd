@@ -1,10 +1,9 @@
 import React from 'react';
-import PropTypes, { element, string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import classnames from 'classnames';
 import {
-	spotlightPeersSelector,
 	videoBoxesSelector
 } from '../../store/selectors';
 import { withRoomContext } from '../../RoomContext';
@@ -12,7 +11,7 @@ import Me from '../Containers/Me';
 import Peer from '../Containers/Peer';
 import SpeakerPeer from '../Containers/SpeakerPeer';
 import Grid from '@material-ui/core/Grid';
-import { Button, Fab } from '@material-ui/core';
+import { Fab } from '@material-ui/core';
 import KeyboardArrowLeftIcon from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowUpIcon from '@material-ui/icons/KeyboardArrowUp';
 import KeyboardArrowDownIcon from '@material-ui/icons/KeyboardArrowDown';
@@ -182,33 +181,61 @@ class FilmstripSlider extends React.PureComponent
 			return;
 
 		const availableWidth = root.clientWidth;
+		const availableHeight = root.clientHeight;
 		// Grid is:
 		// 4/5 speaker
 		// 1/5 filmstrip
-		const availableSpeakerHeight = (root.clientHeight * 0.8) -
+		const availableSpeakerHeight = (availableHeight * 0.8) -
 			(toolbarsVisible || permanentTopBar ? PADDING_V : 0);
+		const availableSpeakerWidth = availableWidth * 0.8;
 
-		const availableFilmstripHeightH = root.clientHeight * 0.2;
-		const availableFilmstripHeightV = root.clientHeight * 0.8;
+		const availableFilmstripHeight = availableHeight * 0.2;
+		const availableFilmstripWidth = availableWidth * 0.2;
 
 		const speaker = this.activePeerContainer.current;
 
 		if (speaker)
 		{
-			let speakerWidth = availableWidth;
 
-			let speakerHeight = speakerWidth / aspectRatio;
+			let speakerWidth;
 
-			if (this.isSharingCamera(this.getActivePeerId()))
+			let speakerHeight;
+
+			if (mode.includes('up') || mode.includes('down'))
 			{
-				speakerWidth /= 2.5;
-				speakerHeight = speakerWidth / aspectRatio;
-			}
+				speakerWidth = availableWidth;
 
-			if (speakerHeight > availableSpeakerHeight)
+				speakerHeight = speakerWidth / aspectRatio;
+
+				if (this.isSharingCamera(this.getActivePeerId()))
+				{
+					speakerWidth /= 2.5;
+					speakerHeight = speakerWidth / aspectRatio;
+				}
+
+				if (speakerHeight > availableSpeakerHeight)
+				{
+					speakerHeight = availableSpeakerHeight;
+					speakerWidth = speakerHeight * aspectRatio;
+				}
+			}
+			else
 			{
 				speakerHeight = availableSpeakerHeight;
+
 				speakerWidth = speakerHeight * aspectRatio;
+
+				if (this.isSharingCamera(this.getActivePeerId()))
+				{
+					speakerHeight /= 1.8;
+					speakerWidth = speakerHeight * aspectRatio;
+				}
+
+				if (speakerWidth > availableSpeakerWidth)
+				{
+					speakerWidth = availableSpeakerWidth;
+					speakerHeight = speakerWidth / aspectRatio;
+				}
 			}
 
 			newState.speakerWidth = speakerWidth;
@@ -221,33 +248,38 @@ class FilmstripSlider extends React.PureComponent
 		{
 			let filmStripHeight;
 
+			let filmStripWidth;
+
 			if (mode.includes('up') || mode.includes('down'))
 			{
-				filmStripHeight = availableFilmstripHeightH - FILMSTRING_PADDING_V;
+				filmStripHeight = availableFilmstripHeight - FILMSTRING_PADDING_V;
+
+				filmStripWidth = filmStripHeight * aspectRatio;
+
+				if (
+					(filmStripWidth * (boxes+1.5)) >
+					(availableWidth - FILMSTRING_PADDING_H)
+				)
+				{
+					filmStripWidth = (availableWidth - FILMSTRING_PADDING_H) /
+						(boxes + 1.5);
+					filmStripHeight = filmStripWidth / aspectRatio;
+				}
 			}
 			else
 			{
-				filmStripHeight = availableFilmstripHeightV - FILMSTRING_PADDING_V;
-			}
+				filmStripWidth = availableFilmstripWidth - FILMSTRING_PADDING_V;
 
-			let filmStripWidth = filmStripHeight * aspectRatio;
-
-			if (
-				(filmStripWidth * boxes) >
-				(availableWidth - FILMSTRING_PADDING_H)
-			)
-			{
-				filmStripWidth = (availableWidth - FILMSTRING_PADDING_H) /
-					boxes;
 				filmStripHeight = filmStripWidth / aspectRatio;
-			}
 
-			if (
-				(filmStripHeight * boxes) > availableFilmstripHeightV
-			)
-			{
-				filmStripHeight = (availableFilmstripHeightV - FILMSTRING_PADDING_V) / boxes;
-				filmStripWidth = filmStripHeight * aspectRatio;
+				if (
+					(filmStripHeight * (boxes+2.5)) >
+					(availableHeight - FILMSTRING_PADDING_H)
+				)
+				{
+					filmStripHeight = (availableHeight - FILMSTRING_PADDING_H) / (boxes+2.5);
+					filmStripWidth = filmStripHeight * aspectRatio;
+				}
 			}
 
 			newState.filmStripWidth = filmStripWidth * FILL_RATE;
@@ -439,7 +471,7 @@ class FilmstripSlider extends React.PureComponent
 					className={classnames(classes.filmItem)}
 					ref={this.filmStripContainer}
 				>
-					<Grid direction={gridDirection} container alignItems='center' justify='center' spacing={2}>
+					<Grid direction={gridDirection} wrap='nowrap' container alignItems='center' justify='center' spacing={2}>
 						<Grid item>
 							<div
 								className={classnames(shareScreenItem, {
@@ -455,51 +487,59 @@ class FilmstripSlider extends React.PureComponent
 								}
 							</div>
 						</Grid>
-						<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
-							{
-								gridDirection === 'row' ? (
-									<KeyboardArrowLeftIcon/>
-								) : (
-									<KeyboardArrowUpIcon/>
-								)
-							}
-						</Fab>
 						{
 							spotlights.length ? (
-								spotlights.map((peerId) =>
-								{
-									return (
-										<Grid key={peerId} item>
-											<div
-												key={peerId}
-												className={classnames(shareScreenItem, {
-													selected : this.props.selectedPeerId === peerId,
-													active   : peerId === activePeerId
-												})}
-											>
-												<Peer
-													advancedMode={advancedMode}
-													id={peerId}
-													style={peerStyle}
-													smallContainer
-												/>
-											</div>
+								<Grid item>
+									<Grid container wrap='nowrap' justify='center' direction={gridDirection} alignItems='center' spacing={2}>
+										<Grid item>
+											<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
+												{
+													gridDirection === 'row' ? (
+														<KeyboardArrowLeftIcon/>
+													) : (
+														<KeyboardArrowUpIcon/>
+													)
+												}
+											</Fab>
 										</Grid>
-									);
-								})
-							) : (
-								('')
-							)
+										{
+											spotlights.map((peerId) =>
+											{
+												return (
+													<Grid key={peerId} item>
+														<div
+															key={peerId}
+															className={classnames(shareScreenItem, {
+																selected : this.props.selectedPeerId === peerId,
+																active   : peerId === activePeerId
+															})}
+														>
+															<Peer
+																advancedMode={advancedMode}
+																id={peerId}
+																style={peerStyle}
+																smallContainer
+															/>
+														</div>
+													</Grid>
+												);
+											})
+										}
+										<Grid item>
+											<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
+												{
+													gridDirection === 'row' ? (
+														<KeyboardArrowRightIcon/>
+													) : (
+														<KeyboardArrowDownIcon/>
+													)
+												}
+											</Fab>
+										</Grid>
+									</Grid>
+								</Grid>
+							) : ('')
 						}
-						<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
-							{
-								gridDirection === 'row' ? (
-									<KeyboardArrowRightIcon/>
-								) : (
-									<KeyboardArrowDownIcon/>
-								)
-							}
-						</Fab>
 					</Grid>
 				</div>
 			</div>
@@ -540,7 +580,8 @@ const mapStateToProps = (state) =>
 		hideSelfView    : state.room.hideSelfView,
 		toolAreaOpen    : state.toolarea.toolAreaOpen,
 		aspectRatio     : state.settings.aspectRatio,
-		permanentTopBar : state.settings.permanentTopBar
+		permanentTopBar : state.settings.permanentTopBar,
+		mode            : state.room.mode
 	};
 };
 
@@ -556,6 +597,7 @@ export default withRoomContext(connect(
 				prev.room.selectedPeerId === next.room.selectedPeerId &&
 				prev.room.toolbarsVisible === next.room.toolbarsVisible &&
 				prev.room.hideSelfView === next.room.hideSelfView &&
+				prev.room.mode === next.room.mode &&
 				prev.toolarea.toolAreaOpen === next.toolarea.toolAreaOpen &&
 				prev.settings.permanentTopBar === next.settings.permanentTopBar &&
 				prev.settings.aspectRatio === next.settings.aspectRatio &&
