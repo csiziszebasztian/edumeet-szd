@@ -83,7 +83,7 @@ export class EdummetPage {
         this.settingsButton = this.page.locator('data-testid=settingsButton');
         this.settingDialog = this.page.locator('data-testid=settingDialog');
         this.participantsButton = this.page.locator('data-testid=participantsButton');
-        this.drawerRaiseHand = this.page.locator('data-testid=drawerRaiseHand');
+        this.drawerRaiseHand = this.page.locator('data-testid=jijfewirfj');
     }
 
     get getJoinButton() : Locator {
