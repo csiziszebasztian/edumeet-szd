@@ -277,7 +277,7 @@ class Room extends React.PureComponent
 					<WakeLock />
 				}
 
-				<View advancedMode={advancedMode} mode={room.mode}/>
+				<View advancedMode={advancedMode} />
 
 				{ (buttonControlBar || room.hideSelfView) &&
 					<ButtonControlBar />
