@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { withStyles } from '@material-ui/core/styles';
 import { withRoomContext } from '../../RoomContext';
@@ -34,15 +34,37 @@ const styles = (theme) =>
 		}
 	});
 
+const FILMSTRIP_SLIDER_MAX_LASTN = 4;
+const DEFAULT_MAX_LASTN = 10;
+
 const AdvancedSettings = ({
 	roomClient,
 	settings,
 	onToggleAdvancedMode,
 	onToggleNotificationSounds,
-	classes
+	classes,
+	mode
 }) =>
 {
 	const intl = useIntl();
+
+	const [ maxLastN, setSetMaxLastN ] = useState(config.maxLastN || DEFAULT_MAX_LASTN);
+
+	useEffect(() =>
+	{
+		switch (mode)
+		{
+			case 'filmstripdown':
+			case 'filmstripup':
+			case 'filmstripright':
+			case 'filmstripleft':
+				setSetMaxLastN(FILMSTRIP_SLIDER_MAX_LASTN);
+				break;
+			default:
+				setSetMaxLastN(DEFAULT_MAX_LASTN);
+				break;
+		}
+	}, [ mode ]);
 
 	return (
 		<React.Fragment>
@@ -79,7 +101,7 @@ const AdvancedSettings = ({
 							className={classes.selectEmpty}
 						>
 							{ Array.from(
-								{ length: config.maxLastN || 10 },
+								{ length: maxLastN },
 								(_, i) => i + 1
 							).map((lastN) =>
 							{
@@ -110,12 +132,14 @@ AdvancedSettings.propTypes =
 	settings                   : PropTypes.object.isRequired,
 	onToggleAdvancedMode       : PropTypes.func.isRequired,
 	onToggleNotificationSounds : PropTypes.func.isRequired,
-	classes                    : PropTypes.object.isRequired
+	classes                    : PropTypes.object.isRequired,
+	mode                       : PropTypes.string.isRequired
 };
 
 const mapStateToProps = (state) =>
 	({
-		settings : state.settings
+		settings : state.settings,
+		mode     : state.room.mode
 	});
 
 const mapDispatchToProps = {
