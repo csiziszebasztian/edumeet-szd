@@ -130,8 +130,6 @@ class L1 extends React.PureComponent
 
 		const availableWidth = root.clientWidth;
 
-		const availableHeight = root.clientHeight;
-
 		const speaker = this.activePeerContainer.current;
 
 		const availableSpeakerHeight = (root.clientHeight * 0.6) -
