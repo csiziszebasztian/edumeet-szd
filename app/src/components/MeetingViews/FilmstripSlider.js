@@ -455,17 +455,20 @@ class FilmstripSlider extends React.PureComponent
 								}
 							</div>
 						</Grid>
-						<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
-							{
-								gridDirection === 'row' ? (
-									<KeyboardArrowLeftIcon/>
-								) : (
-									<KeyboardArrowUpIcon/>
-								)
-							}
-						</Fab>
 						{
-							spotlights.length ? (
+							spotlights.length > 0 &&
+							<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
+								{
+									gridDirection === 'row' ? (
+										<KeyboardArrowLeftIcon/>
+									) : (
+										<KeyboardArrowUpIcon/>
+									)
+								}
+							</Fab>
+						}
+						{
+							spotlights.length > 0 ? (
 								spotlights.map((peerId) =>
 								{
 									return (
@@ -491,15 +494,18 @@ class FilmstripSlider extends React.PureComponent
 								('')
 							)
 						}
-						<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
-							{
-								gridDirection === 'row' ? (
-									<KeyboardArrowRightIcon/>
-								) : (
-									<KeyboardArrowDownIcon/>
-								)
-							}
-						</Fab>
+						{
+							spotlights.length > 0 &&
+							<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
+								{
+									gridDirection === 'row' ? (
+										<KeyboardArrowRightIcon/>
+									) : (
+										<KeyboardArrowDownIcon/>
+									)
+								}
+							</Fab>
+						}
 					</Grid>
 				</div>
 			</div>
