@@ -1,182 +1,243 @@
-import { expect } from '@playwright/test';
-import type { Locator } from '@playwright/test';
-import type {Page} from '@playwright/test';
-
+import { expect } from "@playwright/test";
+import type { Locator } from "@playwright/test";
+import type { Page } from "@playwright/test";
 
 export interface TooltipData {
-    parentTooltipLocator: string;
-    parentTooltipTitle: string;
-    tooltipText: string;
-    hoverElmentLocator: string;
-    toolTipLocator: string;
+  parentTooltipLocator: string;
+  parentTooltipTitle: string;
+  tooltipText: string;
+  hoverElmentLocator: string;
+  toolTipLocator: string;
 }
 
 export interface LocalData {
-    localeButtonLocator: string
+  localeButtonLocator: string;
 }
 
 export interface LoginData {
-    roomLocator: string;
-    roomContent: string;
-    nameLocator: string;
-    nameContent: string;
-    joinLocator: string;
+  roomLocator: string;
+  roomContent: string;
+  nameLocator: string;
+  nameContent: string;
+  joinLocator: string;
 }
 
 export class EdummetPage {
+  readonly page: Page;
 
-    readonly page: Page;
+  //Login-locatores
+  private readonly joinButton: Locator;
+  private readonly displayName: Locator;
+  private readonly roomId: Locator;
+  private readonly micCamToggleButton: Locator;
+  private readonly camToggleButton: Locator;
+  private readonly micToggleButton: Locator;
+  private readonly disableToggleButton: Locator;
+  private readonly micCamTooltip: Locator;
+  private readonly camTooltip: Locator;
+  private readonly micTooltip: Locator;
+  private readonly disableTooltip: Locator;
+  private readonly loginDialog: Locator;
 
-    //Login-locatores
-    private readonly joinButton: Locator;
-    private readonly displayName: Locator;
-    private readonly roomId: Locator;
-    private readonly micCamToggleButton: Locator;
-    private readonly camToggleButton: Locator;
-    private readonly micCamTooltip: Locator;
-    private readonly camTooltip: Locator;
-    private readonly micTooltip: Locator;
-    private readonly disableTooltip: Locator;
-    private readonly loginDialog: Locator;
+  //Global-locators
+  private readonly localeButton: Locator;
+
+  //Room-locator
+  private readonly leaveButton: Locator;
+  private readonly leaveDialog: Locator;
+  private readonly leaveDialogNo: Locator;
+  private readonly leaveDialogYes: Locator;
+  private readonly lockRoomButton: Locator;
+  private readonly settingsButton: Locator;
+  private readonly participantsButton: Locator;
+  private readonly settingDialog: Locator;
+  private readonly fullScreenButton: Locator;
+  private readonly moreActionButton: Locator;
+  private readonly openDrawerButton: Locator;
+  private readonly recordButtton: Locator;
+  private readonly drawerRaiseHand: Locator;
+  private readonly drawer: Locator;
+
+  constructor(page: Page) {
+    this.page = page;
+
+    //Login-locators
+    this.joinButton = this.page.locator("id=joinButton");
+    this.displayName = this.page.locator("id=displayname");
+    this.roomId = this.page.locator("id=roomId");
+    this.micCamToggleButton = this.page.locator(
+      "data-testid=mic-cam-toggleButton"
+    );
+    this.camToggleButton = this.page.locator("data-testid=cam-toggleButton");
+    this.micToggleButton = this.page.locator("data-testid=mic-toggleButton");
+    this.disableToggleButton = this.page.locator(
+      "data-testid=disable-toggleButton"
+    );
+    this.micCamTooltip = this.page.locator("data-testid=mic-cam-tooltip");
+    this.camTooltip = this.page.locator("data-testid=cam-tooltip");
+    this.micTooltip = this.page.locator("data-testid=mic-tooltip");
+    this.disableTooltip = this.page.locator("data-testid=disable-tooltip");
+    this.loginDialog = this.page.locator("data-testid=loginDialog");
 
     //Global-locators
-    private readonly localeButton: Locator;
+    this.localeButton = this.page.locator("data-testid=localeButton");
 
     //Room-locator
-    private readonly leaveButton: Locator;
-    private readonly leaveDialog: Locator;
-    private readonly leaveDialogNo: Locator;
-    private readonly leaveDialogYes: Locator;
+    this.leaveButton = this.page.locator("data-testid=leaveButton");
+    this.leaveDialog = this.page.locator("data-testid=leaveDialog");
+    this.leaveDialogNo = this.page.locator("data-testid=leaveDialogNo");
+    this.leaveDialogYes = this.page.locator("data-testid=leaveDialogYes");
+    this.lockRoomButton = this.page.locator("data-testid=lockRoomButton");
+    this.settingsButton = this.page.locator("data-testid=settingsButton");
+    this.settingDialog = this.page.locator("data-testid=settingDialog");
+    this.participantsButton = this.page.locator(
+      "data-testid=participantsButton"
+    );
+    this.drawerRaiseHand = this.page.locator("data-testid=drawerRaiseHand");
+    this.fullScreenButton = this.page.locator("data-testid=fullscreenButton");
+    this.moreActionButton = this.page.locator("data-testid=moreActions");
+    this.openDrawerButton = this.page.locator("data-testid=openDrawer");
+    this.recordButtton = this.page.locator("data-testid=recordButton");
+    this.drawer = this.page.locator("data-testid=drawer");
 
+  }
 
+  get getJoinButton(): Locator {
+    return this.joinButton;
+  }
 
-    constructor(page: Page) {
+  get getDisplayName(): Locator {
+    return this.displayName;
+  }
 
-        this.page = page;
+  get getRoomId(): Locator {
+    return this.roomId;
+  }
 
-        //Login-locators
-        this.joinButton = this.page.locator('id=joinButton');
-        this.displayName = this.page.locator('id=displayname');
-        this.roomId = this.page.locator('id=roomId');
-        this.micCamToggleButton = this.page.locator('data-testid=mic-cam-toggleButton');
-        this.camToggleButton = this.page.locator('data-testid=cam-toggleButton');
-        this.micCamTooltip = this.page.locator('data-testid=mic-cam-tooltip');
-        this.camTooltip = this.page.locator('data-testid=cam-tooltip');
-        this.micTooltip = this.page.locator('data-testid=mic-tooltip');
-        this.disableTooltip = this.page.locator('data-testid=disable-tooltip');
-        this.loginDialog = this.page.locator('data-testid=loginDialog');
+  get getMicCamToggleButton(): Locator {
+    return this.micCamToggleButton;
+  }
 
-        //Global-locators
-        this.localeButton = this.page.locator('data-testid=localeButton');
+  get getCamToggleButton(): Locator {
+    return this.camToggleButton;
+  }
 
-        //Room-locator
-        this.leaveButton = this.page.locator('data-testid=leaveButton');
-        this.leaveDialog = this.page.locator('data-testid=leaveDialog');
-        this.leaveDialogNo = this.page.locator('data-testid=leaveDialogNo');
-        this.leaveDialogYes = this.page.locator('data-testid=leaveDialogYes');
+  get getMicToggleButton(): Locator {
+    return this.micToggleButton;
+  }
 
+  get getDisableToggleButton(): Locator {
+    return this.disableToggleButton;
+  }
 
-    }
+  get getMicCamTooltip(): Locator {
+    return this.micCamTooltip;
+  }
 
-    get getJoinButton() : Locator {
-        return this.joinButton;
-    }
+  get getCamTooltip(): Locator {
+    return this.camTooltip;
+  }
 
-    get getDisplayName() : Locator {
-        return this.displayName;
-    }
+  get getMicTooltip(): Locator {
+    return this.micTooltip;
+  }
 
-    get getRoomId() : Locator {
-        return this.roomId;
-    }
+  get getDisableTooltip(): Locator {
+    return this.disableTooltip;
+  }
 
-    get getMicCamToggleButton() : Locator {
-        return this.micCamToggleButton;
-    } 
+  get getLoginDialog(): Locator {
+    return this.loginDialog;
+  }
 
-    get getCamToggleButton() : Locator {
-        return this.camToggleButton;
-    }
+  get getLocaleButton(): Locator {
+    return this.localeButton;
+  }
 
-    get getMicCamTooltip() : Locator {
-        return this.micCamTooltip;
-    }
+  get getLeaveButton(): Locator {
+    return this.leaveButton;
+  }
 
-    get getCamTooltip() : Locator {
-        return this.camTooltip;
-    }
+  get getLeaveDialog(): Locator {
+    return this.leaveDialog;
+  }
 
-    get getMicTooltip() : Locator {
-        return this.micTooltip;
-    }
+  get getLeaveDialogNo(): Locator {
+    return this.leaveDialogNo;
+  }
 
-    get getDisableTooltip() : Locator {
-        return this.disableTooltip;
-    }
+  get getLeaveDialogYes(): Locator {
+    return this.leaveDialogYes;
+  }
 
-    get getLoginDialog() : Locator {
-        return this.loginDialog;
-    }
+  get getLockRoomButton(): Locator {
+    return this.lockRoomButton;
+  }
 
-    get getLocaleButton() : Locator {
-        return this.localeButton;
-    }
+  get getSettingsButton(): Locator {
+    return this.settingsButton;
+  }
 
-    get getLeaveButton() : Locator {
-        return this.leaveButton;
-    }
+  get getSettingDialog(): Locator {
+    return this.settingDialog;
+  }
 
-    get getLeaveDialog() : Locator {
-        return this.leaveDialog;
-    }
+  get getParticipantsButton(): Locator {
+    return this.participantsButton;
+  }
 
-    get getLeaveDialogNo() : Locator {
-        return this.leaveDialogNo;
-    }
+  get getDrawerRaiseHand(): Locator {
+    return this.drawerRaiseHand;
+  }
 
-    get getLeaveDialogYes() : Locator {
-        return this.leaveDialogYes;
-    }
+  get getFullScreenButton(): Locator {
+    return this.fullScreenButton;
+  }
 
-    async goto() {
-        await this.page.goto('/');
-    }
+  get getMoreActionButton (): Locator {
+    return this.moreActionButton;
+  }
 
-    async login(){
-        await this.roomId.fill('playwrightRoom');
-        await this.displayName.fill('testUser1');
-        await this.joinButton.click();
-    }
+  get getOpenDrawerButton (): Locator {
+    return this.openDrawerButton;
+  }
 
+  get getRecordButtton (): Locator {
+    return this.recordButtton;
+  }
 
-    async customLogin(loginDate: LoginData){
-        await this.page.locator(loginDate.roomLocator).fill(loginDate.roomContent);
-        await this.page.locator(loginDate.nameLocator).fill(loginDate.nameContent);
-        await this.page.locator(loginDate.joinLocator).click();
-    }
+  get getDrawer (): Locator {
+    return this.drawer;
+  }
 
-    async tooltipTest(tooltipData: TooltipData ) {
+  async goto() {
+    await this.page.goto("/");
+  }
 
-        const parentTooltip = this.page.locator(tooltipData.parentTooltipLocator);
+  async login() {
+    await this.roomId.fill("playwrightRoom");
+    await this.displayName.fill("testUser1");
+    await this.joinButton.click();
+  }
 
-        const tooltipText = await parentTooltip.getAttribute(tooltipData.parentTooltipTitle);
-        expect(tooltipText).toEqual(tooltipData.tooltipText);
+  async customLogin(loginDate: LoginData) {
+    await this.page.locator(loginDate.roomLocator).fill(loginDate.roomContent);
+    await this.page.locator(loginDate.nameLocator).fill(loginDate.nameContent);
+    await this.page.locator(loginDate.joinLocator).click();
+  }
 
-        const hoverElment = this.page.locator(tooltipData.hoverElmentLocator);
-        await hoverElment.hover();
-        const tooltip = this.page.locator(tooltipData.toolTipLocator);
-        await expect(tooltip).toBeVisible();
-        await expect(tooltip).toHaveText(tooltipData.tooltipText);
+  async tooltipTest(tooltipData: TooltipData) {
+    const parentTooltip = this.page.locator(tooltipData.parentTooltipLocator);
 
-    }
+    const tooltipText = await parentTooltip.getAttribute(
+      tooltipData.parentTooltipTitle
+    );
+    expect(tooltipText).toEqual(tooltipData.tooltipText);
 
-    async localizationTest() {
-        const localeButton = this.page.locator('data-testid=localeButton');
-        const joinButton = this.page.locator('id=joinButton');
-        await expect(joinButton).toContainText('Join');
-        await localeButton.click();
-        const hunButton = this.page.locator('text=Hungarian');
-        await hunButton.click();
-        await expect(joinButton).toContainText('Kapcsolódás');
-    }
-};
+    const hoverElment = this.page.locator(tooltipData.hoverElmentLocator);
+    await hoverElment.hover();
+    const tooltip = this.page.locator(tooltipData.toolTipLocator);
+    await expect(tooltip).toBeVisible();
+    await expect(tooltip).toHaveText(tooltipData.tooltipText);
+  }
+}
