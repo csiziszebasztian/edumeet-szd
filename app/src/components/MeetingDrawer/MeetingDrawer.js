@@ -68,7 +68,7 @@ const MeetingDrawer = (props) =>
 	} = props;
 
 	return (
-		<div className={classes.root}>
+		<div data-testid='drawer' className={classes.root}>
 			<AppBar
 				position='static'
 				color='default'

@@ -452,6 +452,7 @@ const TopBar = (props) =>
 					<div className={classes.sectionDesktop}>
 						{ recordingInProgress &&
 						<IconButton
+							data-testid='recordButton'
 							disabled
 							color='inherit'
 							aria-label={intl.formatMessage(
@@ -472,6 +473,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='moreActions'
 								aria-owns={
 									isMenuOpen &&
 									currentMenu === 'moreActions' ?
@@ -487,6 +489,7 @@ const TopBar = (props) =>
 						{ fullscreenEnabled &&
 							<Tooltip title={fullscreenTooltip}>
 								<IconButton
+									data-testid='fullscreenButton'
 									aria-label={intl.formatMessage({
 										id             : 'tooltip.enterFullscreen',
 										defaultMessage : 'Enter fullscreen'
