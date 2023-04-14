@@ -71,6 +71,7 @@ const Help = ({
 
 	return (
 		<Dialog
+			data-testid='helpDialog'
 			open={helpOpen}
 			onClose={() => { handleCloseHelp(false); }}
 			classes={{

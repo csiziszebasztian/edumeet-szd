@@ -519,6 +519,7 @@ const Me = (props) =>
 	return (
 		<React.Fragment>
 			<div
+				data-testid='meCameraVideo'
 				className={
 					classnames(
 						classes.root,

@@ -62,6 +62,7 @@ const About = ({
 {
 	return (
 		<Dialog
+			data-testid='abautDialog'
 			open={aboutOpen}
 			onClose={() => handleCloseAbout(false)}
 			classes={{
