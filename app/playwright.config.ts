@@ -48,7 +48,7 @@ const config: PlaywrightTestConfig = {
   projects: [
     {
       name: 'chromium',
-      testIgnore: ["chat.spec.ts"],
+      testIgnore: ["chat.spec.ts", "multiple-user.spec.ts"],
       use: {
         ...devices['Desktop Chrome'],
         ignoreHTTPSErrors: true,
@@ -57,7 +57,7 @@ const config: PlaywrightTestConfig = {
 
     {
       name: 'firefox',
-      testIgnore: ["chat.spec.ts"],
+      testIgnore: ["chat.spec.ts", "multiple-user.spec.ts"],
       use: {
         ...devices['Desktop Firefox'],
         ignoreHTTPSErrors: true,
@@ -67,6 +67,12 @@ const config: PlaywrightTestConfig = {
       name: 'chat',
       testDir: './e2e',
       testMatch: 'chat.spec.ts',
+    },
+
+    {
+      name: 'multiple user',
+      testDir: './e2e',
+      testMatch: 'multiple-user.spec.ts',
     },
 
     /*{
