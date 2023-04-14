@@ -57,6 +57,18 @@ export class EdummetPage {
   private readonly recordButtton: Locator;
   private readonly drawerRaiseHand: Locator;
   private readonly drawer: Locator;
+  private readonly moreActionList: Locator;
+  private readonly addVideo: Locator;
+  private readonly addVideoDialog: Locator;
+  private readonly hideSelfView: Locator;
+  private readonly meCameraVideo: Locator;
+  private readonly helpDialog: Locator;
+  private readonly help: Locator;
+  private readonly abaut: Locator;
+  private readonly abautDialog: Locator;
+  private readonly showLobbyButton: Locator;
+  private readonly lobbyDialog: Locator;
+  private readonly promoteAllLobby: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -99,8 +111,19 @@ export class EdummetPage {
     this.openDrawerButton = this.page.locator("data-testid=openDrawer");
     this.recordButtton = this.page.locator("data-testid=recordButton");
     this.drawer = this.page.locator("data-testid=drawer");
-
-  }
+    this.moreActionList = this.page.locator("data-testid=moreActionList");
+    this.addVideo = this.page.locator("data-testid=addVideo");
+    this.addVideoDialog = this.page.locator("data-testid=addVideoDialog");
+    this.meCameraVideo = this.page.locator("data-testid=meCameraVideo");
+    this.hideSelfView = this.page.locator("data-testid=hideSelfView");
+    this.help = this.page.locator("data-testid=help");
+    this.helpDialog = this.page.locator("data-testid=helpDialog");
+    this.abaut = this.page.locator("data-testid=abaut");
+    this.abautDialog = this.page.locator("data-testid=abautDialog");
+    this.showLobbyButton = this.page.locator("data-testid=showLobbyButton");
+    this.lobbyDialog = this.page.locator("data-testid=lobbyDialog");
+    this.promoteAllLobby = this.page.locator("data-testid=promoteAllLobby");
+    }
 
   get getJoinButton(): Locator {
     return this.joinButton;
@@ -194,29 +217,77 @@ export class EdummetPage {
     return this.fullScreenButton;
   }
 
-  get getMoreActionButton (): Locator {
+  get getMoreActionButton(): Locator {
     return this.moreActionButton;
   }
 
-  get getOpenDrawerButton (): Locator {
+  get getOpenDrawerButton(): Locator {
     return this.openDrawerButton;
   }
 
-  get getRecordButtton (): Locator {
+  get getRecordButtton(): Locator {
     return this.recordButtton;
   }
 
-  get getDrawer (): Locator {
+  get getDrawer(): Locator {
     return this.drawer;
   }
 
+  get getMoreActionList(): Locator {
+    return this.moreActionList
+  }
+
+  get getAddVideo(): Locator {
+    return this.addVideo;
+  }
+
+  get getAddVideoDialog(): Locator {
+    return this.addVideoDialog;
+  }
+
+  get getMeCameraVideo(): Locator {
+    return this.meCameraVideo;
+  }
+
+  get getHideSelfView(): Locator {
+    return this.hideSelfView;
+  }
+
+  get getHelp(): Locator {
+    return this.help;
+  }
+
+  get getHelpDialog(): Locator {
+    return this.helpDialog;
+  }
+
+  get getAbaut(): Locator {
+    return this.abaut;
+  }
+
+  get getAbautDialog(): Locator {
+    return this.abautDialog;
+  }
+
+  get getShowLobbyButton(): Locator {
+    return this.showLobbyButton;
+  }
+
+  get getLobbyDialog(): Locator {
+    return this.lobbyDialog;
+  }
+
+  get getPromoteAllLobby(): Locator {
+    return this.promoteAllLobby;
+  }
+  
   async goto() {
     await this.page.goto("/");
   }
 
-  async login() {
-    await this.roomId.fill("playwrightRoom");
-    await this.displayName.fill("testUser1");
+  async login(roomId: string, displayName: string) {
+    await this.roomId.fill(roomId);
+    await this.displayName.fill(displayName);
     await this.joinButton.click();
   }
 
