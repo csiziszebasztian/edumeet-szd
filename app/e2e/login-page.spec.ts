@@ -1,5 +1,4 @@
 import { test, expect } from "@playwright/test";
-import type { Locator } from "@playwright/test";
 import { EdummetPage } from "../playwright-support/edummet-page.js";
 import type { TooltipData } from "../playwright-support/edummet-page.js";
 
