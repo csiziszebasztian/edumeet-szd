@@ -4,11 +4,11 @@ import { EdummetPage } from "../playwright-support/edummet-page.js";
 test.beforeEach(async ({ page }, testInfo) => {
   const edumeetPage = new EdummetPage(page);
   edumeetPage.goto();
-  edumeetPage.login();
+  edumeetPage.login("Playwright", "User1");
 });
 
 test.describe("Leave button", async () => {
-  test("Standard test", async ({ page }) => {
+  test("Standard", async ({ page }) => {
     const edumeetPage = new EdummetPage(page);
     const leaveButton = edumeetPage.getLeaveButton;
     await expect(leaveButton).toBeVisible();
@@ -61,7 +61,7 @@ test("Local menu", async ({ page }) => {
   await expect(leaveButton).toContainText("Kilépés");
 });
 
-test("Lock room button test", async ({ page }) => {
+test("Lock room button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
   const lockRoomButton = edumeetPage.getLockRoomButton;
@@ -76,7 +76,7 @@ test("Lock room button test", async ({ page }) => {
   await expect(tooltip).toHaveText("Lock room");
 });
 
-test("Setting button test", async ({ page }) => {
+test("Setting button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
   const settingButton = edumeetPage.getSettingsButton;
@@ -96,7 +96,7 @@ test("Setting button test", async ({ page }) => {
   await expect(settingDialog).toBeVisible();
 });
 
-test("Participants button test", async ({ page }) => {
+test("Participants button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
   const participantsButton = edumeetPage.getParticipantsButton;
@@ -116,7 +116,7 @@ test("Participants button test", async ({ page }) => {
   await expect(drawer).toBeVisible();
 });
 
-test("Fullscreen button test", async ({ page }) => {
+test("Fullscreen button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
   const fullScreenButton = edumeetPage.getFullScreenButton;
@@ -130,27 +130,27 @@ test("Fullscreen button test", async ({ page }) => {
   await expect(tooltip).toHaveText("Enter fullscreen");
 });
 
-test("More actions button test", async ({ page }) => {
+test("More actions button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
-  const participantsButton = edumeetPage.getParticipantsButton;
-  const drawer = edumeetPage.getDrawerRaiseHand;
+  const moreActionButton = edumeetPage.getMoreActionButton;
+  const moreActionList = edumeetPage.getMoreActionList;
   const tooltip = page.locator("role=tooltip");
 
-  await expect(participantsButton).toBeVisible();
-  await expect(participantsButton).toBeEnabled();
+  await expect(moreActionButton).toBeVisible();
+  await expect(moreActionButton).toBeEnabled();
 
   await expect(tooltip).not.toBeVisible();
-  await participantsButton.hover();
+  await moreActionButton.hover();
   await expect(tooltip).toBeVisible();
-  await expect(tooltip).toHaveText("Show participants");
+  await expect(tooltip).toHaveText("More actions");
 
-  await expect(drawer).not.toBeVisible();
-  await participantsButton.click();
-  await expect(drawer).toBeVisible();
+  await expect(moreActionList).not.toBeVisible();
+  await moreActionButton.click();
+  await expect(moreActionList).toBeVisible();
 });
 
-test("Open drawer button test", async ({ page }) => {
+test("Open drawer button", async ({ page }) => {
   const edumeetPage = new EdummetPage(page);
 
   const openDrawerButton = edumeetPage.getOpenDrawerButton;
@@ -162,4 +162,71 @@ test("Open drawer button test", async ({ page }) => {
   await expect(drawer).not.toBeVisible();
   await openDrawerButton.click();
   await expect(drawer).toBeVisible();
+});
+
+test.describe("More actions list", async () => {
+
+  test("Add new video input", async ({ page }) => {
+    const edumeetPage = new EdummetPage(page);
+    const moreActionButton = edumeetPage.getMoreActionButton;
+    const addVideo = edumeetPage.getAddVideo;
+    const addVideoDialog = edumeetPage.getAddVideoDialog;
+
+    await expect(addVideoDialog).not.toBeVisible();
+
+    await moreActionButton.click();
+    await addVideo.click();
+
+    await expect(addVideoDialog).toBeVisible();
+
+  });
+
+  test("Add and remove self view", async ({ page }) => {
+    const edumeetPage = new EdummetPage(page);
+    const moreActionButton = edumeetPage.getMoreActionButton;
+    const hideSelfView = edumeetPage.getHideSelfView;
+    const meCameraVideo = edumeetPage.getMeCameraVideo;
+
+    await expect(meCameraVideo).toBeVisible();
+
+    await moreActionButton.click();
+    await hideSelfView.click();
+
+    await expect(meCameraVideo).not.toBeVisible();
+
+    await moreActionButton.click();
+    await hideSelfView.click();
+
+    await expect(meCameraVideo).toBeVisible();
+  });
+
+  test("Click Help", async ({ page }) => {
+    const edumeetPage = new EdummetPage(page);
+    const moreActionButton = edumeetPage.getMoreActionButton;
+    const help = edumeetPage.getHelp;
+    const helpDialog = edumeetPage.getHelpDialog;
+
+    await expect(helpDialog).not.toBeVisible();
+
+    await moreActionButton.click();
+    await help.click();
+
+    await expect(helpDialog).toBeVisible();
+  });
+
+  test("Click Abaut", async ({ page }) => {
+    const edumeetPage = new EdummetPage(page);
+
+    const moreActionButton = edumeetPage.getMoreActionButton;
+    const abaut = edumeetPage.getAbaut;
+    const abautDialog = edumeetPage.getAbautDialog;
+
+    await expect(abautDialog).not.toBeVisible();
+
+    await moreActionButton.click();
+    await abaut.click();
+
+    await expect(abautDialog).toBeVisible();
+
+  });
 });
