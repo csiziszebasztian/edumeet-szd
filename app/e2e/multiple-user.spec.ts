@@ -1,5 +1,5 @@
 import { test, expect, chromium, firefox } from "@playwright/test";
-import { EdummetPage } from "../playwright-support/edummet-page.js";
+import { EduMeetPage } from "../playwright-support/edumeet-page.js";
 
 test("Lock room: chromium", async () => {
   const browser = await chromium.launch();
@@ -8,8 +8,8 @@ test("Lock room: chromium", async () => {
   const page1 = await context.newPage();
   const page2 = await context.newPage();
 
-  const edumeetPage1 = new EdummetPage(page1);
-  const edumeetPage2 = new EdummetPage(page2);
+  const edumeetPage1 = new EduMeetPage(page1);
+  const edumeetPage2 = new EduMeetPage(page2);
 
   const roomId = "Playwright";
   const userId1 = "User1";
@@ -41,8 +41,8 @@ test("Lock room: firefox", async () => {
   const page1 = await context.newPage();
   const page2 = await context.newPage();
 
-  const edumeetPage1 = new EdummetPage(page1);
-  const edumeetPage2 = new EdummetPage(page2);
+  const edumeetPage1 = new EduMeetPage(page1);
+  const edumeetPage2 = new EduMeetPage(page2);
 
   const roomId = "Playwright";
   const userId1 = "User1";
