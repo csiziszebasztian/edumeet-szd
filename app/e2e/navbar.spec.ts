@@ -1,56 +1,41 @@
-import { test, expect } from "@playwright/test";
-import { EdummetPage } from "../playwright-support/edummet-page.js";
+import { test, expect } from "../playwright-support/fixture.ts";
 
-test.beforeEach(async ({ page }, testInfo) => {
-  const edumeetPage = new EdummetPage(page);
-  edumeetPage.goto();
-  edumeetPage.login("Playwright", "User1");
+test("Standard", async ({ joinedEduMeetPage }) => {
+  const leaveButton = joinedEduMeetPage.getLeaveButton;
+  await expect(leaveButton).toBeVisible();
+  await expect(leaveButton).toHaveText("Leave");
+  await expect(leaveButton).toBeEnabled();
 });
 
-test.describe("Leave button", async () => {
-  test("Standard", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const leaveButton = edumeetPage.getLeaveButton;
-    await expect(leaveButton).toBeVisible();
-    await expect(leaveButton).toHaveText("Leave");
-    await expect(leaveButton).toBeEnabled();
-  });
-
-
-  test("Click but not leave", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const leaveButton = edumeetPage.getLeaveButton;
-    const leaveDialog = edumeetPage.getLeaveDialog;
-    const leaveDialogNo = edumeetPage.getLeaveDialogNo;
-    await expect(leaveDialog).not.toBeVisible();
-    await leaveButton.click();
-    await expect(leaveDialog).toBeVisible();
-    await leaveDialogNo.click();
-    await expect(leaveButton).toBeVisible();
-  });
-
-  test("Click and leave", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const leaveButton = edumeetPage.getLeaveButton;
-    const leaveDialog = edumeetPage.getLeaveDialog;
-    const leaveDialogYes = edumeetPage.getLeaveDialogYes;
-    const loginDialog = edumeetPage.getLoginDialog;
-
-    await expect(leaveDialog).not.toBeVisible();
-    await leaveButton.click();
-    await expect(leaveDialog).toBeVisible();
-    await expect(loginDialog).not.toBeVisible();
-    await leaveDialogYes.click();
-    await expect(leaveButton).not.toBeVisible();
-    await expect(loginDialog).toBeVisible();
-  });
+test("Click but not leave", async ({ joinedEduMeetPage }) => {
+  const leaveButton = joinedEduMeetPage.getLeaveButton;
+  const leaveDialog = joinedEduMeetPage.getLeaveDialog;
+  const leaveDialogNo = joinedEduMeetPage.getLeaveDialogNo;
+  await expect(leaveDialog).not.toBeVisible();
+  await leaveButton.click();
+  await expect(leaveDialog).toBeVisible();
+  await leaveDialogNo.click();
+  await expect(leaveButton).toBeVisible();
 });
 
-test("Local menu", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("Click and leave", async ({ joinedEduMeetPage }) => {
+  const leaveButton = joinedEduMeetPage.getLeaveButton;
+  const leaveDialog = joinedEduMeetPage.getLeaveDialog;
+  const leaveDialogYes = joinedEduMeetPage.getLeaveDialogYes;
+  const loginDialog = joinedEduMeetPage.getLoginDialog;
 
-  const localButton = edumeetPage.getLocaleButton;
-  const leaveButton = edumeetPage.getLeaveButton;
+  await expect(leaveDialog).not.toBeVisible();
+  await leaveButton.click();
+  await expect(leaveDialog).toBeVisible();
+  await expect(loginDialog).not.toBeVisible();
+  await leaveDialogYes.click();
+  await expect(leaveButton).not.toBeVisible();
+  await expect(loginDialog).toBeVisible();
+});
+
+test("Local menu", async ({ joinedEduMeetPage, page }) => {
+  const localButton = joinedEduMeetPage.getLocaleButton;
+  const leaveButton = joinedEduMeetPage.getLeaveButton;
 
   await expect(leaveButton).toContainText("Leave");
 
@@ -61,10 +46,8 @@ test("Local menu", async ({ page }) => {
   await expect(leaveButton).toContainText("Kilépés");
 });
 
-test("Lock room button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
-
-  const lockRoomButton = edumeetPage.getLockRoomButton;
+test("Lock room button", async ({ joinedEduMeetPage, page }) => {
+  const lockRoomButton = joinedEduMeetPage.getLockRoomButton;
   const tooltip = page.locator("role=tooltip");
 
   await expect(lockRoomButton).toBeVisible();
@@ -76,11 +59,10 @@ test("Lock room button", async ({ page }) => {
   await expect(tooltip).toHaveText("Lock room");
 });
 
-test("Setting button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("Setting button", async ({ joinedEduMeetPage, page }) => {
 
-  const settingButton = edumeetPage.getSettingsButton;
-  const settingDialog = edumeetPage.getSettingDialog;
+  const settingButton = joinedEduMeetPage.getSettingsButton;
+  const settingDialog = joinedEduMeetPage.getSettingDialog;
   const tooltip = page.locator("role=tooltip");
 
   await expect(settingButton).toBeVisible();
@@ -96,11 +78,10 @@ test("Setting button", async ({ page }) => {
   await expect(settingDialog).toBeVisible();
 });
 
-test("Participants button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("Participants button", async ({ joinedEduMeetPage, page }) => {
 
-  const participantsButton = edumeetPage.getParticipantsButton;
-  const drawer = edumeetPage.getDrawerRaiseHand;
+  const participantsButton = joinedEduMeetPage.getParticipantsButton;
+  const drawer = joinedEduMeetPage.getDrawerRaiseHand;
   const tooltip = page.locator("role=tooltip");
 
   await expect(participantsButton).toBeVisible();
@@ -116,10 +97,9 @@ test("Participants button", async ({ page }) => {
   await expect(drawer).toBeVisible();
 });
 
-test("Fullscreen button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("Fullscreen button", async ({ joinedEduMeetPage, page }) => {
 
-  const fullScreenButton = edumeetPage.getFullScreenButton;
+  const fullScreenButton = joinedEduMeetPage.getFullScreenButton;
   const tooltip = page.locator("role=tooltip");
 
   await expect(fullScreenButton).toBeVisible();
@@ -130,11 +110,10 @@ test("Fullscreen button", async ({ page }) => {
   await expect(tooltip).toHaveText("Enter fullscreen");
 });
 
-test("More actions button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("More actions button", async ({ joinedEduMeetPage, page }) => {
 
-  const moreActionButton = edumeetPage.getMoreActionButton;
-  const moreActionList = edumeetPage.getMoreActionList;
+  const moreActionButton = joinedEduMeetPage.getMoreActionButton;
+  const moreActionList = joinedEduMeetPage.getMoreActionList;
   const tooltip = page.locator("role=tooltip");
 
   await expect(moreActionButton).toBeVisible();
@@ -150,11 +129,10 @@ test("More actions button", async ({ page }) => {
   await expect(moreActionList).toBeVisible();
 });
 
-test("Open drawer button", async ({ page }) => {
-  const edumeetPage = new EdummetPage(page);
+test("Open drawer button", async ({ joinedEduMeetPage, page }) => {
 
-  const openDrawerButton = edumeetPage.getOpenDrawerButton;
-  const drawer = edumeetPage.getDrawer;
+  const openDrawerButton = joinedEduMeetPage.getOpenDrawerButton;
+  const drawer = joinedEduMeetPage.getDrawer;
 
   await expect(openDrawerButton).toBeVisible();
   await expect(openDrawerButton).toBeEnabled();
@@ -164,69 +142,63 @@ test("Open drawer button", async ({ page }) => {
   await expect(drawer).toBeVisible();
 });
 
-test.describe("More actions list", async () => {
+test("Add new video input", async ({ joinedEduMeetPage }) => {
 
-  test("Add new video input", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const moreActionButton = edumeetPage.getMoreActionButton;
-    const addVideo = edumeetPage.getAddVideo;
-    const addVideoDialog = edumeetPage.getAddVideoDialog;
+  const moreActionButton = joinedEduMeetPage.getMoreActionButton;
+  const addVideo = joinedEduMeetPage.getAddVideo;
+  const addVideoDialog = joinedEduMeetPage.getAddVideoDialog;
 
-    await expect(addVideoDialog).not.toBeVisible();
+  await expect(addVideoDialog).not.toBeVisible();
 
-    await moreActionButton.click();
-    await addVideo.click();
+  await moreActionButton.click();
+  await addVideo.click();
 
-    await expect(addVideoDialog).toBeVisible();
+  await expect(addVideoDialog).toBeVisible();
+});
 
-  });
+test("Add and remove self view", async ({ joinedEduMeetPage }) => {
 
-  test("Add and remove self view", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const moreActionButton = edumeetPage.getMoreActionButton;
-    const hideSelfView = edumeetPage.getHideSelfView;
-    const meCameraVideo = edumeetPage.getMeCameraVideo;
+  const moreActionButton = joinedEduMeetPage.getMoreActionButton;
+  const hideSelfView = joinedEduMeetPage.getHideSelfView;
+  const meCameraVideo = joinedEduMeetPage.getMeCameraVideo;
 
-    await expect(meCameraVideo).toBeVisible();
+  await expect(meCameraVideo).toBeVisible();
 
-    await moreActionButton.click();
-    await hideSelfView.click();
+  await moreActionButton.click();
+  await hideSelfView.click();
 
-    await expect(meCameraVideo).not.toBeVisible();
+  await expect(meCameraVideo).not.toBeVisible();
 
-    await moreActionButton.click();
-    await hideSelfView.click();
+  await moreActionButton.click();
+  await hideSelfView.click();
 
-    await expect(meCameraVideo).toBeVisible();
-  });
+  await expect(meCameraVideo).toBeVisible();
+});
 
-  test("Click Help", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
-    const moreActionButton = edumeetPage.getMoreActionButton;
-    const help = edumeetPage.getHelp;
-    const helpDialog = edumeetPage.getHelpDialog;
+test("Click Help", async ({ joinedEduMeetPage }) => {
 
-    await expect(helpDialog).not.toBeVisible();
+  const moreActionButton = joinedEduMeetPage.getMoreActionButton;
+  const help = joinedEduMeetPage.getHelp;
+  const helpDialog = joinedEduMeetPage.getHelpDialog;
 
-    await moreActionButton.click();
-    await help.click();
+  await expect(helpDialog).not.toBeVisible();
 
-    await expect(helpDialog).toBeVisible();
-  });
+  await moreActionButton.click();
+  await help.click();
 
-  test("Click Abaut", async ({ page }) => {
-    const edumeetPage = new EdummetPage(page);
+  await expect(helpDialog).toBeVisible();
+});
 
-    const moreActionButton = edumeetPage.getMoreActionButton;
-    const abaut = edumeetPage.getAbaut;
-    const abautDialog = edumeetPage.getAbautDialog;
+test("Click Abaut", async ({ joinedEduMeetPage }) => {
 
-    await expect(abautDialog).not.toBeVisible();
+  const moreActionButton = joinedEduMeetPage.getMoreActionButton;
+  const abaut = joinedEduMeetPage.getAbaut;
+  const abautDialog = joinedEduMeetPage.getAbautDialog;
 
-    await moreActionButton.click();
-    await abaut.click();
+  await expect(abautDialog).not.toBeVisible();
 
-    await expect(abautDialog).toBeVisible();
+  await moreActionButton.click();
+  await abaut.click();
 
-  });
+  await expect(abautDialog).toBeVisible();
 });
