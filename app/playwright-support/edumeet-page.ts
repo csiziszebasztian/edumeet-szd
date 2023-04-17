@@ -22,7 +22,7 @@ export interface LoginData {
   joinLocator: string;
 }
 
-export class EdummetPage {
+export class EduMeetPage {
   readonly page: Page;
 
   //Login-locatores
