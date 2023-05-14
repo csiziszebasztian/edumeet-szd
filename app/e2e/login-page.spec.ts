@@ -47,205 +47,75 @@ test("Room name", async ({ eduMeetPage, page }) => {
 });
 
 
-// const toggleButtons =[
-//   {
-//     testName: "Camera and Microphone",
-//     testToggleButton: "getMicCamToggleButton",
-//   },
-//   {
-//     testName: "Camera and Microphone",
-//     testToggleButton: "getMicCamToggleButton",
-//   },
-//   {
-//     testName: "Camera and Microphone",
-//     testToggleButton: "getMicCamToggleButton",
-//   },
-//   {
-//     testName: "Camera and Microphone",
-//     testToggleButton: "getMicCamToggleButton",
-//   },
-// ]
+const toggleButtons = [
+  {
+    testName: "Camera and Microphone",
+    testToggleButton: "getMicCamToggleButton",
+  },
+  {
+    testName: "Camera",
+    testToggleButton: "getCamToggleButton",
+  },
+  {
+    testName: "Microphone",
+    testToggleButton: "getMicToggleButton",
+  },
+  {
+    testName: "Disable",
+    testToggleButton: "getDisableToggleButton",
+  },
+]
 
-// for(const toggleButton of toggleButtons) {
+for(const toggleButton of toggleButtons) {
 
-//   test(`${toggleButton.testName} toggle button`, async ({ eduMeetPage }) => {
+  test(`${toggleButton.testName} toggle button`, async ({ eduMeetPage }) => {
 
-//     const micCamToggleButton = eduMeetPage["getMicCamToggleButton"];
-//     const camToggleButton = eduMeetPage["getCamToggleButton"];
-  
-//     let micCamButtonPressed = await micCamToggleButton.getAttribute(
-//       "aria-pressed"
-//     );
-//     let camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-  
-//     await expect(micCamToggleButton).toBeVisible();
-//     await expect(micCamToggleButton).toBeEnabled();
-//     expect(micCamButtonPressed).toEqual("true");
-  
-//     let color = await micCamToggleButton.evaluate((ele) => {
-//       return window.getComputedStyle(ele).getPropertyValue("background-color");
-//     });
-  
-//     expect(color).toBe("rgb(95, 155, 45)");
-  
-//     await expect(camToggleButton).toBeVisible();
-//     await expect(camToggleButton).toBeEnabled();
-//     expect(camButtonPressed).toEqual("false");
-//     await camToggleButton.click();
-  
-//     color = await micCamToggleButton.evaluate((ele) => {
-//       return window.getComputedStyle(ele).getPropertyValue("background-color");
-//     });
-  
-//     expect(color).toBe("rgba(0, 0, 0, 0)");
-  
-//     micCamButtonPressed = await micCamToggleButton.getAttribute("aria-pressed");
-//     camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-  
-//     expect(micCamButtonPressed).toEqual("false");
-//     expect(camButtonPressed).toEqual("true");
-//   });
+    let defaultActiveToggleButton;
 
-// }
+    if(toggleButton.testToggleButton === "getMicCamToggleButton") {
+      defaultActiveToggleButton = eduMeetPage.getCamToggleButton;
+      await defaultActiveToggleButton.click();
+    }
+    else {
+      defaultActiveToggleButton = eduMeetPage.getMicCamToggleButton;
+    }
 
-test("Camera and Microphone toggle button", async ({ eduMeetPage }) => {
-
-  const micCamToggleButton = eduMeetPage["getMicCamToggleButton"];
-  const camToggleButton = eduMeetPage["getCamToggleButton"];
-
-  let micCamButtonPressed = await micCamToggleButton.getAttribute(
-    "aria-pressed"
-  );
-  let camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-
-  await expect(micCamToggleButton).toBeVisible();
-  await expect(micCamToggleButton).toBeEnabled();
-  expect(micCamButtonPressed).toEqual("true");
-
-  let color = await micCamToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
+    const testToggleButton = eduMeetPage[toggleButton.testToggleButton];
+  
+    let defaultActiveToggleButtonPressed = await defaultActiveToggleButton.getAttribute(
+      "aria-pressed"
+    );
+    let testToggleButtonPressed = await testToggleButton.getAttribute("aria-pressed");
+  
+    await expect(defaultActiveToggleButton).toBeVisible();
+    await expect(defaultActiveToggleButton).toBeEnabled();
+    expect(defaultActiveToggleButtonPressed).toEqual("true");
+  
+    let color = await defaultActiveToggleButton.evaluate((ele) => {
+      return window.getComputedStyle(ele).getPropertyValue("background-color");
+    });
+  
+    expect(color).toBe("rgb(95, 155, 45)");
+  
+    await expect(testToggleButton).toBeVisible();
+    await expect(testToggleButton).toBeEnabled();
+    expect(testToggleButtonPressed).toEqual("false");
+    await testToggleButton.click();
+  
+    color = await defaultActiveToggleButton.evaluate((ele) => {
+      return window.getComputedStyle(ele).getPropertyValue("background-color");
+    });
+  
+    expect(color).toBe("rgba(0, 0, 0, 0)");
+  
+    defaultActiveToggleButtonPressed = await defaultActiveToggleButton.getAttribute("aria-pressed");
+    testToggleButtonPressed = await testToggleButton.getAttribute("aria-pressed");
+  
+    expect(defaultActiveToggleButtonPressed).toEqual("false");
+    expect(testToggleButtonPressed).toEqual("true");
   });
 
-  expect(color).toBe("rgb(95, 155, 45)");
-
-  await expect(camToggleButton).toBeVisible();
-  await expect(camToggleButton).toBeEnabled();
-  expect(camButtonPressed).toEqual("false");
-  await camToggleButton.click();
-
-  color = await micCamToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgba(0, 0, 0, 0)");
-
-  micCamButtonPressed = await micCamToggleButton.getAttribute("aria-pressed");
-  camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-
-  expect(micCamButtonPressed).toEqual("false");
-  expect(camButtonPressed).toEqual("true");
-});
-
-test("Camera toggle button", async ({ eduMeetPage }) => {
-
-  const camToggleButton = eduMeetPage.getCamToggleButton;
-  const micCamToggleButton = eduMeetPage.getMicCamToggleButton;
-
-  let camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-
-  let color = await camToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgba(0, 0, 0, 0)");
-
-  await expect(camToggleButton).toBeVisible();
-  await expect(camToggleButton).toBeEnabled();
-  expect(camButtonPressed).toEqual("false");
-  await camToggleButton.click();
-
-  color = await camToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgb(95, 155, 45)");
-
-  let micCamButtonPressed = await micCamToggleButton.getAttribute(
-    "aria-pressed"
-  );
-  camButtonPressed = await camToggleButton.getAttribute("aria-pressed");
-
-  expect(micCamButtonPressed).toEqual("false");
-  expect(camButtonPressed).toEqual("true");
-});
-
-test("Microphone toggle button", async ({ eduMeetPage }) => {
-
-  const micToggleButton = eduMeetPage.getMicToggleButton;
-  const micCamToggleButton = eduMeetPage.getMicCamToggleButton;
-
-  let micButtonPressed = await micToggleButton.getAttribute("aria-pressed");
-
-  let color = await micToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgba(0, 0, 0, 0)");
-
-  await expect(micToggleButton).toBeVisible();
-  await expect(micToggleButton).toBeEnabled();
-  expect(micButtonPressed).toEqual("false");
-  await micToggleButton.click();
-
-  color = await micToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgb(95, 155, 45)");
-
-  let micCamButtonPressed = await micCamToggleButton.getAttribute(
-    "aria-pressed"
-  );
-  micButtonPressed = await micToggleButton.getAttribute("aria-pressed");
-
-  expect(micCamButtonPressed).toEqual("false");
-  expect(micButtonPressed).toEqual("true");
-});
-
-test("Disable toggle button", async ({ eduMeetPage }) => {
-
-  const disableToggleButton = eduMeetPage.getDisableToggleButton;
-  const micCamToggleButton = eduMeetPage.getMicCamToggleButton;
-
-  let disableButtonPressed = await disableToggleButton.getAttribute(
-    "aria-pressed"
-  );
-
-  let color = await disableToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgba(0, 0, 0, 0)");
-
-  await expect(disableToggleButton).toBeVisible();
-  await expect(disableToggleButton).toBeEnabled();
-  expect(disableButtonPressed).toEqual("false");
-  await disableToggleButton.click();
-
-  color = await disableToggleButton.evaluate((ele) => {
-    return window.getComputedStyle(ele).getPropertyValue("background-color");
-  });
-
-  expect(color).toBe("rgb(245, 0, 87)");
-
-  let micCamButtonPressed = await micCamToggleButton.getAttribute(
-    "aria-pressed"
-  );
-  disableButtonPressed = await disableToggleButton.getAttribute("aria-pressed");
-
-  expect(micCamButtonPressed).toEqual("false");
-  expect(disableButtonPressed).toEqual("true");
-});
+}
 
 test("Only one active button", async ({ eduMeetPage }) => {
 

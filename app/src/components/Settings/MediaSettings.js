@@ -250,6 +250,7 @@ const MediaSettings = ({
 				variant='fullWidth'
 			>
 				<Tab
+					data-testid='mediaSettingsVideoTab'
 					label={
 						intl.formatMessage({
 							id             : 'label.videoSettings',
@@ -259,6 +260,7 @@ const MediaSettings = ({
 					icon={<Videocam />}
 				/>
 				<Tab
+					data-testid='mediaSettingsAudioTab'
 					label={intl.formatMessage({
 						id             : 'label.audioSettings',
 						defaultMessage : 'Audio settings'
@@ -321,7 +323,7 @@ const MediaSettings = ({
 						{videoSettingsOpen ? <ExpandLess /> : <ExpandMore />}
 					</ListItem>
 					<Collapse in={videoSettingsOpen} timeout='auto'>
-						<FormControl className={classes.formControl}>
+						<FormControl data-testid='resolution' className={classes.formControl}>
 							<Select
 								value={settings.resolution || ''}
 								onChange={(event) =>
@@ -352,7 +354,7 @@ const MediaSettings = ({
 								/>
 							</FormHelperText>
 						</FormControl>
-						<FormControl className={classes.formControl}>
+						<FormControl data-testid='webcamFrameRate' className={classes.formControl}>
 							<Select
 								value={settings.frameRate}
 								onChange={(event) =>
@@ -383,7 +385,7 @@ const MediaSettings = ({
 								/>
 							</FormHelperText>
 						</FormControl>
-						<FormControl className={classes.formControl}>
+						<FormControl data-testid='screenSharingFrameRate' className={classes.formControl}>
 							<Select
 								value={settings.screenSharingFrameRate || ''}
 								onChange={(event) =>
@@ -411,7 +413,7 @@ const MediaSettings = ({
 								/>
 							</FormHelperText>
 						</FormControl>
-						<FormControl className={classes.formControl}>
+						<FormControl data-testid='recordingsPreferredMimeType' className={classes.formControl}>
 							<Select
 								value={settings.recorderPreferredMimeType || ''}
 								onChange={(event) =>
@@ -447,7 +449,7 @@ const MediaSettings = ({
 			</form>}
 
 			{currentSettingsTab === 'audioSettings' && <form className={classes.setting} autoComplete='off'>
-				<FormControl className={classes.formControl}>
+				<FormControl data-testid='audio' className={classes.formControl}>
 					<Select
 						value={settings.selectedAudioDevice || ''}
 						onChange={(event) =>
@@ -531,7 +533,7 @@ const MediaSettings = ({
 					</FormControl>
 				}
 
-				{settings.audioPresets && <FormControl className={classes.formControl}>
+				{settings.audioPresets && <FormControl data-testid='audioPreset' className={classes.formControl}>
 					<Select
 						value={settings.audioPreset}
 						onChange={(event) =>
@@ -611,11 +613,11 @@ const MediaSettings = ({
 					</ListItem>
 					<Collapse in={audioSettingsOpen} timeout='auto'>
 						<List component='div'>
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='echoCancellation' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='echoCancellationSwitch' color='secondary'
 											checked={settings.echoCancellation}
 											onChange={
 												(event) =>
@@ -631,11 +633,11 @@ const MediaSettings = ({
 									})}
 								/>
 							</ListItem>
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='autoGainControl' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='autoGainControlSwitch' color='secondary'
 											checked={settings.autoGainControl} onChange={
 												(event) =>
 												{
@@ -650,11 +652,11 @@ const MediaSettings = ({
 									})}
 								/>
 							</ListItem>
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='noiseSuppression' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='noiseSuppressionSwitch' color='secondary'
 											checked={settings.noiseSuppression} onChange={
 												(event) =>
 												{
@@ -669,11 +671,11 @@ const MediaSettings = ({
 									})}
 								/>
 							</ListItem>
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='voiceActivatedUnmute' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='voiceActivatedUnmuteSwitch' color='secondary'
 											checked={settings.voiceActivatedUnmute} onChange={
 												(event) =>
 												{
@@ -715,7 +717,7 @@ const MediaSettings = ({
 							{/* advanced options */}
 
 							<ListItem className={classes.nested}>
-								<FormControl className={classes.formControl}>
+								<FormControl data-testid='sampleRate' className={classes.formControl}>
 									<Select
 										value={settings.sampleRate || ''}
 										onChange={(event) =>
@@ -749,7 +751,7 @@ const MediaSettings = ({
 							</ListItem>
 
 							<ListItem className={classes.nested}>
-								<FormControl className={classes.formControl}>
+								<FormControl data-testid='channelCount' className={classes.formControl}>
 									<Select
 										value={settings.channelCount || ''}
 										onChange={(event) =>
@@ -783,7 +785,7 @@ const MediaSettings = ({
 							</ListItem>
 
 							<ListItem className={classes.nested}>
-								<FormControl className={classes.formControl}>
+								<FormControl data-testid='sampleSize' className={classes.formControl}>
 									<Select
 										value={settings.sampleSize || ''}
 										onChange={(event) =>
@@ -816,11 +818,11 @@ const MediaSettings = ({
 								</FormControl>
 							</ListItem>
 
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='opusDtx' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='opusDtxSwitch' color='secondary'
 											checked={settings.opusDtx} onChange={
 												(event) =>
 												{
@@ -836,11 +838,11 @@ const MediaSettings = ({
 								/>
 							</ListItem>
 
-							<ListItem className={classes.nested}>
+							<ListItem data-testid='opusFec' className={classes.nested}>
 								<FormControlLabel
 									className={classnames(classes.setting, classes.switchLabel)}
 									control={
-										<Switch color='secondary'
+										<Switch data-testid='opusFecSwitch' color='secondary'
 											checked={settings.opusFec} onChange={
 												(event) =>
 												{
@@ -857,7 +859,7 @@ const MediaSettings = ({
 							</ListItem>
 
 							<ListItem className={classes.nested}>
-								<FormControl className={classes.formControl}>
+								<FormControl data-testid='opusPtime' className={classes.formControl}>
 									<Select
 										value={settings.opusPtime || ''}
 										onChange={(event) =>

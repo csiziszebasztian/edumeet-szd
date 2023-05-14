@@ -182,6 +182,7 @@ const ListPeer = (props) =>
 			</div>
 			{ peer.raisedHand &&
 				<IconButton
+					data-testId='isRaisedHand'
 					className={classes.buttons}
 					style={{ color: green[500] }}
 					disabled={!isModerator || peer.raisedHandInProgress}
@@ -220,6 +221,7 @@ const ListPeer = (props) =>
 						})}
 					>
 						<RecordVoiceOverIcon
+							data-testid='isSpeaker'
 							className={classes.indicator}
 							style={{ color: green[500] }}
 						/>
@@ -233,6 +235,7 @@ const ListPeer = (props) =>
 				placement='bottom'
 			>
 				<IconButton
+					data-testid='muteParticipant'
 					aria-label={intl.formatMessage({
 						id             : 'tooltip.muteParticipant',
 						defaultMessage : 'Mute audio'
@@ -262,6 +265,7 @@ const ListPeer = (props) =>
 				})}
 			>
 				<IconButton
+					data-testid='participantsMoreActionsButton'
 					aria-haspopup
 					onClick={(event) => handleMenuOpen(event, 'moreActions')}
 					color='inherit'
@@ -271,6 +275,7 @@ const ListPeer = (props) =>
 				</IconButton>
 			</Tooltip>
 			<Popover
+				data-testid='participnatsMoreActions'
 				anchorEl={anchorEl}
 				anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
 				transformOrigin={{ vertical: 'top', horizontal: 'left' }}
@@ -284,7 +289,7 @@ const ListPeer = (props) =>
 						<Typography className={classes.moreActionsHeader}>
 							{peer.displayName}
 						</Typography>
-						<ListItem className={classes.nested}
+						<ListItem data-testid='participantsVolumeSlider' className={classes.nested}
 							disabled={!micConsumer || peer.stopPeerAudioInProgress}
 						>
 							<VolumeDownIcon />
@@ -306,6 +311,7 @@ const ListPeer = (props) =>
 							<VolumeUpIcon />
 						</ListItem>
 						<MenuItem
+							data-testid='participantsMuteVideo'
 							disabled={
 								peer.peerVideoInProgress ||
 								!webcamConsumer ||
@@ -340,6 +346,7 @@ const ListPeer = (props) =>
 							</p>
 						</MenuItem>
 						<MenuItem
+							data-testid='participantsScreensShare'
 							disabled={
 								peer.peerScreenInProgress ||
 								!screenConsumer ||
@@ -374,6 +381,7 @@ const ListPeer = (props) =>
 							</p>
 						</MenuItem>
 						<MenuItem
+							data-testid='participantToSpotlight'
 							onClick={() =>
 							{
 								// handleMenuClose();

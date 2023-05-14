@@ -22,8 +22,22 @@ export interface LoginData {
   joinLocator: string;
 }
 
+export interface SelectorData {
+  label: string;
+  locator: string;
+  defaultValue?: string;
+  selectedValue?: string;
+}
+
+export interface SwitchData {
+  label: string;
+  locator: string;
+  switchLocator: string;
+  isChecked: boolean;
+}
+
 export class EduMeetPage {
-  readonly page: Page;
+  private readonly page: Page;
 
   //Login-locatores
   private readonly joinButton: Locator;
@@ -69,6 +83,8 @@ export class EduMeetPage {
   private readonly showLobbyButton: Locator;
   private readonly lobbyDialog: Locator;
   private readonly promoteAllLobby: Locator;
+  private readonly mediaSettingsVideoTab: Locator;
+  private readonly mediaSettingsAudioTab: Locator;
 
   constructor(page: Page) {
     this.page = page;
@@ -77,53 +93,53 @@ export class EduMeetPage {
     this.joinButton = this.page.locator("id=joinButton");
     this.displayName = this.page.locator("id=displayname");
     this.roomId = this.page.locator("id=roomId");
-    this.micCamToggleButton = this.page.locator(
-      "data-testid=mic-cam-toggleButton"
-    );
-    this.camToggleButton = this.page.locator("data-testid=cam-toggleButton");
-    this.micToggleButton = this.page.locator("data-testid=mic-toggleButton");
-    this.disableToggleButton = this.page.locator(
-      "data-testid=disable-toggleButton"
-    );
-    this.micCamTooltip = this.page.locator("data-testid=mic-cam-tooltip");
-    this.camTooltip = this.page.locator("data-testid=cam-tooltip");
-    this.micTooltip = this.page.locator("data-testid=mic-tooltip");
-    this.disableTooltip = this.page.locator("data-testid=disable-tooltip");
-    this.loginDialog = this.page.locator("data-testid=loginDialog");
+    this.micCamToggleButton = this.page.getByTestId("mic-cam-toggleButton");
+    this.camToggleButton = this.page.getByTestId("cam-toggleButton");
+    this.micToggleButton = this.page.getByTestId("mic-toggleButton");
+    this.disableToggleButton = this.page.getByTestId("disable-toggleButton");
+    this.micCamTooltip = this.page.getByTestId("mic-cam-tooltip");
+    this.camTooltip = this.page.getByTestId("cam-tooltip");
+    this.micTooltip = this.page.getByTestId("mic-tooltip");
+    this.disableTooltip = this.page.getByTestId("disable-tooltip");
+    this.loginDialog = this.page.getByTestId("loginDialog");
 
-    //Global-locators
-    this.localeButton = this.page.locator("data-testid=localeButton");
+    //Global-getByTestIds
+    this.localeButton = this.page.getByTestId("localeButton");
 
-    //Room-locator
-    this.leaveButton = this.page.locator("data-testid=leaveButton");
-    this.leaveDialog = this.page.locator("data-testid=leaveDialog");
-    this.leaveDialogNo = this.page.locator("data-testid=leaveDialogNo");
-    this.leaveDialogYes = this.page.locator("data-testid=leaveDialogYes");
-    this.lockRoomButton = this.page.locator("data-testid=lockRoomButton");
-    this.settingsButton = this.page.locator("data-testid=settingsButton");
-    this.settingDialog = this.page.locator("data-testid=settingDialog");
-    this.participantsButton = this.page.locator(
-      "data-testid=participantsButton"
-    );
-    this.drawerRaiseHand = this.page.locator("data-testid=drawerRaiseHand");
-    this.fullScreenButton = this.page.locator("data-testid=fullscreenButton");
-    this.moreActionButton = this.page.locator("data-testid=moreActions");
-    this.openDrawerButton = this.page.locator("data-testid=openDrawer");
-    this.recordButtton = this.page.locator("data-testid=recordButton");
-    this.drawer = this.page.locator("data-testid=drawer");
-    this.moreActionList = this.page.locator("data-testid=moreActionList");
-    this.addVideo = this.page.locator("data-testid=addVideo");
-    this.addVideoDialog = this.page.locator("data-testid=addVideoDialog");
-    this.meCameraVideo = this.page.locator("data-testid=meCameraVideo");
-    this.hideSelfView = this.page.locator("data-testid=hideSelfView");
-    this.help = this.page.locator("data-testid=help");
-    this.helpDialog = this.page.locator("data-testid=helpDialog");
-    this.abaut = this.page.locator("data-testid=abaut");
-    this.abautDialog = this.page.locator("data-testid=abautDialog");
-    this.showLobbyButton = this.page.locator("data-testid=showLobbyButton");
-    this.lobbyDialog = this.page.locator("data-testid=lobbyDialog");
-    this.promoteAllLobby = this.page.locator("data-testid=promoteAllLobby");
-    }
+    //Room-getByTestId
+    this.leaveButton = this.page.getByTestId("leaveButton");
+    this.leaveDialog = this.page.getByTestId("leaveDialog");
+    this.leaveDialogNo = this.page.getByTestId("leaveDialogNo");
+    this.leaveDialogYes = this.page.getByTestId("leaveDialogYes");
+    this.lockRoomButton = this.page.getByTestId("lockRoomButton");
+    this.settingsButton = this.page.getByTestId("settingsButton");
+    this.settingDialog = this.page.getByTestId("settingDialog");
+    this.participantsButton = this.page.getByTestId("participantsButton");
+    this.drawerRaiseHand = this.page.getByTestId("drawerRaiseHand");
+    this.fullScreenButton = this.page.getByTestId("fullscreenButton");
+    this.moreActionButton = this.page.getByTestId("moreActions");
+    this.openDrawerButton = this.page.getByTestId("openDrawer");
+    this.recordButtton = this.page.getByTestId("recordButton");
+    this.drawer = this.page.getByTestId("drawer");
+    this.moreActionList = this.page.getByTestId("moreActionList");
+    this.addVideo = this.page.getByTestId("addVideo");
+    this.addVideoDialog = this.page.getByTestId("addVideoDialog");
+    this.meCameraVideo = this.page.getByTestId("meCameraVideo");
+    this.hideSelfView = this.page.getByTestId("hideSelfView");
+    this.help = this.page.getByTestId("help");
+    this.helpDialog = this.page.getByTestId("helpDialog");
+    this.abaut = this.page.getByTestId("abaut");
+    this.abautDialog = this.page.getByTestId("abautDialog");
+    this.showLobbyButton = this.page.getByTestId("showLobbyButton");
+    this.lobbyDialog = this.page.getByTestId("lobbyDialog");
+    this.promoteAllLobby = this.page.getByTestId("promoteAllLobby");
+    this.mediaSettingsVideoTab = this.page.getByTestId("mediaSettingsVideoTab");
+    this.mediaSettingsAudioTab = this.page.getByTestId("mediaSettingsAudioTab");
+  }
+
+  get getPage(): Page {
+    return this.page;
+  }
 
   get getJoinButton(): Locator {
     return this.joinButton;
@@ -234,7 +250,7 @@ export class EduMeetPage {
   }
 
   get getMoreActionList(): Locator {
-    return this.moreActionList
+    return this.moreActionList;
   }
 
   get getAddVideo(): Locator {
@@ -280,7 +296,15 @@ export class EduMeetPage {
   get getPromoteAllLobby(): Locator {
     return this.promoteAllLobby;
   }
-  
+
+  get getMediaSettingsVideoTab(): Locator {
+    return this.mediaSettingsVideoTab;
+  }
+
+  get getMediaSettingsAudioTab(): Locator {
+    return this.mediaSettingsAudioTab;
+  }
+
   async goto() {
     await this.page.goto("/");
   }
@@ -291,10 +315,10 @@ export class EduMeetPage {
     await this.joinButton.click();
   }
 
-  async customLogin(loginDate: LoginData) {
-    await this.page.locator(loginDate.roomLocator).fill(loginDate.roomContent);
-    await this.page.locator(loginDate.nameLocator).fill(loginDate.nameContent);
-    await this.page.locator(loginDate.joinLocator).click();
+  async customLogin(loginData: LoginData) {
+    await this.page.locator(loginData.roomLocator).fill(loginData.roomContent);
+    await this.page.locator(loginData.nameLocator).fill(loginData.nameContent);
+    await this.page.locator(loginData.joinLocator).click();
   }
 
   async tooltipTest(tooltipData: TooltipData) {
@@ -310,5 +334,47 @@ export class EduMeetPage {
     const tooltip = this.page.locator(tooltipData.toolTipLocator);
     await expect(tooltip).toBeVisible();
     await expect(tooltip).toHaveText(tooltipData.tooltipText);
+  }
+
+  async selectorTest(selectorData: SelectorData) {
+    const setting = this.page.getByTestId(selectorData.locator);
+
+    await expect(setting).toBeVisible();
+    await expect(setting).toBeEnabled();
+    await expect(setting).toContainText(selectorData.label);
+
+    if (selectorData?.defaultValue && selectorData?.selectedValue) {
+      const selector = setting.getByRole("button");
+      const input = setting.locator("input");
+      expect(await input.inputValue()).toEqual(selectorData.defaultValue);
+      await selector.click();
+      await this.page
+        .locator(`li[data-value="${selectorData.selectedValue}"]`)
+        .click();
+      expect(await input.inputValue()).toEqual(selectorData.selectedValue);
+    }
+  }
+
+  async switchTest(switchData: SwitchData) {
+    const setting = this.page.getByTestId(switchData.locator);
+    await expect(setting).toBeVisible();
+    await expect(setting).toBeEnabled();
+
+    if (switchData.switchLocator) {
+      const switchElement = this.page.getByTestId(
+        switchData.switchLocator
+      );
+      const attribute = "class";
+      const checked = "checked";
+      const defaultValue = switchData.isChecked;
+
+      let switchElementAttribute = await switchElement.getAttribute(attribute);
+      let isChecked = switchElementAttribute?.includes(checked);
+      expect(isChecked).toEqual(defaultValue);
+      await switchElement.click();
+      switchElementAttribute = await switchElement.getAttribute(attribute);
+      isChecked = switchElementAttribute?.includes(checked);
+      expect(isChecked).toEqual(!defaultValue);
+    }
   }
 }

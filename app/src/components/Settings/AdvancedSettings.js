@@ -46,8 +46,9 @@ const AdvancedSettings = ({
 	return (
 		<React.Fragment>
 			<FormControlLabel
+				data-testid='advancedMode'
 				className={classnames(classes.setting, classes.switchLabel)}
-				control={<Switch checked={settings.advancedMode} onChange={onToggleAdvancedMode} value='advancedMode' />}
+				control={<Switch data-testid='advancedModeSwitch' checked={settings.advancedMode} onChange={onToggleAdvancedMode} value='advancedMode' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.advancedMode',
@@ -55,8 +56,9 @@ const AdvancedSettings = ({
 				})}
 			/>
 			<FormControlLabel
+				data-testid='notificationSounds'
 				className={classnames(classes.setting, classes.switchLabel)}
-				control={<Switch checked={settings.notificationSounds} onChange={onToggleNotificationSounds} value='notificationSounds' />}
+				control={<Switch data-testid='notificationSoundsSwitch' checked={settings.notificationSounds} onChange={onToggleNotificationSounds} value='notificationSounds' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.notificationSounds',
@@ -65,7 +67,7 @@ const AdvancedSettings = ({
 			/>
 			{ !config.lockLastN &&
 				<form className={classes.setting} autoComplete='off'>
-					<FormControl className={classes.formControl}>
+					<FormControl data-testid='lastn' className={classes.formControl}>
 						<Select
 							value={settings.lastN || ''}
 							onChange={(event) =>

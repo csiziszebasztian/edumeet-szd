@@ -83,6 +83,7 @@ const MeetingDrawer = (props) =>
 					variant='fullWidth'
 				>
 					<Tab
+						data-testid='participantsTab'
 						label={
 							<Badge color='secondary' badgeContent={raisedHands}>
 								<GroupIcon />&nbsp;

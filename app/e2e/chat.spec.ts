@@ -14,9 +14,14 @@ test("Chat test: chromium", async () => {
   await page1.locator("data-testid=openDrawer").click();
 
   await expect(page1.locator("text=ABC12345")).not.toBeVisible();
+  await expect(page1.locator("role=textbox")).toBeVisible();
+  await expect(page1.locator("role=textbox")).toBeEnabled();
   await page1.locator("role=textbox").fill("ABC12345");
   await page1.locator('[aria-label="Send"]').click();
+  await page1.locator("role=textbox").fill("XYZ12345");
+  await page1.locator("role=textbox").press("Enter");
   await expect(page1.locator("text=ABC12345")).toBeVisible();
+  await expect(page1.locator("text=XYZ12345")).toBeVisible();
 
   await page2.goto("https://localhost:4443/");
   await page2.locator("id=roomId").fill("edumeetChromiumRoom");
@@ -24,6 +29,11 @@ test("Chat test: chromium", async () => {
   await page2.locator("id=joinButton").click();
   await page2.locator("data-testid=openDrawer").click();
   await expect(page1.locator("text=ABC12345")).toBeVisible();
+  await expect(page1.locator("text=XYZ12345")).toBeVisible();
+
+  context.close();
+  browser.close();
+
 });
 
 test("Chat test: firefox", async () => {
@@ -40,9 +50,14 @@ test("Chat test: firefox", async () => {
   await page1.locator("data-testid=openDrawer").click();
 
   await expect(page1.locator("text=ABC12345")).not.toBeVisible();
+  await expect(page1.locator("role=textbox")).toBeVisible();
+  await expect(page1.locator("role=textbox")).toBeEnabled();
   await page1.locator("role=textbox").fill("ABC12345");
   await page1.locator('[aria-label="Send"]').click();
+  await page1.locator("role=textbox").fill("XYZ12345");
+  await page1.locator("role=textbox").press("Enter");
   await expect(page1.locator("text=ABC12345")).toBeVisible();
+  await expect(page1.locator("text=XYZ12345")).toBeVisible();
 
   await page2.goto("https://localhost:4443/");
   await page2.locator("id=roomId").fill("edumeetFirefoxRoom");
@@ -50,4 +65,8 @@ test("Chat test: firefox", async () => {
   await page2.locator("id=joinButton").click();
   await page2.locator("data-testid=openDrawer").click();
   await expect(page2.locator("text=ABC12345")).toBeVisible();
+  await expect(page1.locator("text=XYZ12345")).toBeVisible();
+
+  context.close();
+  browser.close();
 });

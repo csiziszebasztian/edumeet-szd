@@ -76,7 +76,7 @@ const AppearanceSettings = (props) =>
 	return (
 		<React.Fragment>
 
-			<FormControl className={classes.setting}>
+			<FormControl data-testid='selectLanguage' className={classes.setting}>
 				<Select
 					value={locale || ''}
 					onChange={(event) =>
@@ -109,7 +109,7 @@ const AppearanceSettings = (props) =>
 				</FormHelperText>
 			</FormControl>
 
-			<FormControl className={classes.setting}>
+			<FormControl data-testid='selectRoomLayout' className={classes.setting}>
 				<Select
 					value={room.mode || ''}
 					onChange={(event) =>
@@ -141,7 +141,7 @@ const AppearanceSettings = (props) =>
 				</FormHelperText>
 			</FormControl>
 
-			<FormControl className={classes.setting}>
+			<FormControl data-testid='selectAspectRatio' className={classes.setting}>
 				<Select
 					value={settings.aspectRatio || ''}
 					onChange={(event) =>
@@ -176,9 +176,10 @@ const AppearanceSettings = (props) =>
 				</FormHelperText>
 			</FormControl>
 			<FormControlLabel
+				data-testid='mirrorOwnVideo'
 				className={classnames(classes.setting, classes.switchLabel)}
 				control={
-					<Switch checked={settings.mirrorOwnVideo} onChange={onToggleMirrorOwnVideo} value='mirrorOwnVideo' />}
+					<Switch data-testid='mirrorOwnVideoSwitch' checked={settings.mirrorOwnVideo} onChange={onToggleMirrorOwnVideo} value='mirrorOwnVideo' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.mirrorOwnVideo',
@@ -186,9 +187,11 @@ const AppearanceSettings = (props) =>
 				})}
 			/>
 			<FormControlLabel
+				data-testid='hideNoVideoParticipants'
 				className={classnames(classes.setting, classes.switchLabel)}
 				control={
 					<Switch
+						data-testid='hideNoVideoParticipantsSwitch'
 						checked={settings.hideNoVideoParticipants}
 						onChange={() =>
 						{
@@ -204,9 +207,10 @@ const AppearanceSettings = (props) =>
 				})}
 			/>
 			<FormControlLabel
+				data-testid='permanentTopBar'
 				className={classnames(classes.setting, classes.switchLabel)}
 				control={
-					<Switch checked={settings.permanentTopBar} onChange={onTogglePermanentTopBar} value='permanentTopBar' />}
+					<Switch data-testid='permanentTopBarSwitch' checked={settings.permanentTopBar} onChange={onTogglePermanentTopBar} value='permanentTopBar' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.permanentTopBar',
@@ -214,8 +218,9 @@ const AppearanceSettings = (props) =>
 				})}
 			/>
 			<FormControlLabel
+				data-testid='hiddenControls'
 				className={classnames(classes.setting, classes.switchLabel)}
-				control={<Switch checked={settings.hiddenControls} onChange={onToggleHiddenControls} value='hiddenControls' />}
+				control={<Switch data-testid='hiddenControlsSwitch' checked={settings.hiddenControls} onChange={onToggleHiddenControls} value='hiddenControls' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.hiddenControls',
@@ -223,8 +228,9 @@ const AppearanceSettings = (props) =>
 				})}
 			/>
 			<FormControlLabel
+				data-testid='buttonControlBar'
 				className={classnames(classes.setting, classes.switchLabel)}
-				control={<Switch checked={settings.buttonControlBar} onChange={onToggleButtonControlBar} value='buttonControlBar' />}
+				control={<Switch data-testid='buttonControlBarSwitch' checked={settings.buttonControlBar} onChange={onToggleButtonControlBar} value='buttonControlBar' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.buttonControlBar',
@@ -233,8 +239,9 @@ const AppearanceSettings = (props) =>
 			/>
 			{ !isMobile &&
 				<FormControlLabel
+					data-testid='drawerOverlayed'
 					className={classnames(classes.setting, classes.switchLabel)}
-					control={<Switch checked={settings.drawerOverlayed} onChange={onToggleDrawerOverlayed} value='drawerOverlayed' />}
+					control={<Switch data-testid='drawerOverlayedSwitch' checked={settings.drawerOverlayed} onChange={onToggleDrawerOverlayed} value='drawerOverlayed' />}
 					labelPlacement='start'
 					label={intl.formatMessage({
 						id             : 'settings.drawerOverlayed',
@@ -243,8 +250,9 @@ const AppearanceSettings = (props) =>
 				/>
 			}
 			<FormControlLabel
+				data-testid='showNotifications'
 				className={classnames(classes.setting, classes.switchLabel)}
-				control={<Switch checked={settings.showNotifications} onChange={onToggleShowNotifications} value='showNotifications' />}
+				control={<Switch data-testid='showNotificationsSwitch' checked={settings.showNotifications} onChange={onToggleShowNotifications} value='showNotifications' />}
 				labelPlacement='start'
 				label={intl.formatMessage({
 					id             : 'settings.showNotifications',

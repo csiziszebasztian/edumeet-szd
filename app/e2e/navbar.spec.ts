@@ -129,7 +129,7 @@ test("More actions button", async ({ joinedEduMeetPage, page }) => {
   await expect(moreActionList).toBeVisible();
 });
 
-test("Open drawer button", async ({ joinedEduMeetPage, page }) => {
+test("Open drawer button", async ({ joinedEduMeetPage }) => {
 
   const openDrawerButton = joinedEduMeetPage.getOpenDrawerButton;
   const drawer = joinedEduMeetPage.getDrawer;
