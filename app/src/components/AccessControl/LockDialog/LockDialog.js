@@ -63,6 +63,7 @@ const LockDialog = ({
 {
 	return (
 		<Dialog
+			data-testid='lobbyDialog'
 			className={classes.root}
 			open={room.lockDialogOpen}
 			onClose={() => handleCloseLockDialog(false)}
@@ -107,6 +108,7 @@ const LockDialog = ({
 			}
 			<DialogActions>
 				<Button
+					data-testid='promoteAllLobby'
 					disabled={
 						lobbyPeers.length === 0 ||
 						!canPromote ||

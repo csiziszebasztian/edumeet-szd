@@ -79,7 +79,7 @@ class ParticipantList extends React.PureComponent
 		} = this.props;
 
 		return (
-			<div className={classes.root} ref={(node) => { this.node = node; }}>
+			<div data-testid='' className={classes.root} ref={(node) => { this.node = node; }}>
 				{ isModerator &&
 					<ul className={classes.list}>
 						<li className={classes.listheader}>
@@ -91,8 +91,8 @@ class ParticipantList extends React.PureComponent
 						<ListModerator />
 					</ul>
 				}
-				<ul className={classes.list}>
-					<li className={classes.listheader}>
+				<ul data-testid='meContainer' className={classes.list}>
+					<li data-testid='participantMeHeader' className={classes.listheader}>
 						<FormattedMessage
 							id='room.me'
 							defaultMessage='Me'
@@ -100,7 +100,7 @@ class ParticipantList extends React.PureComponent
 					</li>
 					<ListMe />
 				</ul>
-				<ul className={classes.list}>
+				<ul data-testid='participantList' className={classes.list}>
 					<li className={classes.listheader}>
 						<FormattedMessage
 							id='label.participants'

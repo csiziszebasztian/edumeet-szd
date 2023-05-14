@@ -255,6 +255,7 @@ const ChatInput = (props) =>
 								enterNextDelay='700'
 							>
 								<IconButton
+									data-testid='drawerBoldButton'
 									size='small'
 									classes={{ sizeSmall: classes.icon }}
 									disabled={!canChat}
@@ -286,6 +287,7 @@ const ChatInput = (props) =>
 								enterNextDelay='700'
 							>
 								<IconButton
+									data-testid='drawerItalicButton'
 									size='small'
 									classes={{ sizeSmall: classes.icon }}
 									disabled={!canChat}
@@ -315,6 +317,7 @@ const ChatInput = (props) =>
 								enterNextDelay='700'
 							>
 								<IconButton
+									data-testid='drawerUnderlineButton'
 									size='small'
 									classes={{ sizeSmall: classes.icon }}
 									disabled={!canChat}
@@ -357,6 +360,7 @@ const ChatInput = (props) =>
 									enterNextDelay='700'
 								>
 									<IconButton
+										data-testid='drawerSortAscendingButton'
 										className={classes.IconButton}
 										aria-label={intl.formatMessage({
 											id             : 'label.sortAscending',
@@ -383,6 +387,7 @@ const ChatInput = (props) =>
 									enterNextDelay='700'
 								>
 									<IconButton
+										data-testid='drawerSortDescendingButton'
 										className={classes.IconButton}
 										aria-label={intl.formatMessage({
 											id             : 'label.sortDescending',
@@ -413,6 +418,7 @@ const ChatInput = (props) =>
 								enterNextDelay='700'
 							>
 								<IconButton
+									data-testid='drawerSaveChatButton'
 									size='small'
 									classes={{ sizeSmall: classes.icon }}
 									disabled={!canShareFiles || !canShare || chatItemsLength === 0}
@@ -454,6 +460,7 @@ const ChatInput = (props) =>
 								>
 
 									<IconButton
+										data-testid='drawerShareFileButton'
 										size='small'
 										classes={{ sizeSmall: classes.icon }}
 										color='primary'

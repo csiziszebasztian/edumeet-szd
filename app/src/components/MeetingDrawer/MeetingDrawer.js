@@ -68,7 +68,7 @@ const MeetingDrawer = (props) =>
 	} = props;
 
 	return (
-		<div className={classes.root}>
+		<div data-testid='drawer' className={classes.root}>
 			<AppBar
 				position='static'
 				color='default'
@@ -83,6 +83,7 @@ const MeetingDrawer = (props) =>
 					variant='fullWidth'
 				>
 					<Tab
+						data-testid='participantsTab'
 						label={
 							<Badge color='secondary' badgeContent={raisedHands}>
 								<GroupIcon />&nbsp;

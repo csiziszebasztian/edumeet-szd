@@ -72,6 +72,7 @@ const ExtraVideo = ({
 
 	return (
 		<Dialog
+			data-testid='addVideoDialog'
 			open={extraVideoOpen}
 			onClose={() => handleCloseExtraVideo(false)}
 			classes={{

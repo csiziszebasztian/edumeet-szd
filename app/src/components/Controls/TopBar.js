@@ -452,6 +452,7 @@ const TopBar = (props) =>
 					<div className={classes.sectionDesktop}>
 						{ recordingInProgress &&
 						<IconButton
+							data-testid='recordButton'
 							disabled
 							color='inherit'
 							aria-label={intl.formatMessage(
@@ -472,6 +473,7 @@ const TopBar = (props) =>
 							})}
 						>
 							<IconButton
+								data-testid='moreActions'
 								aria-owns={
 									isMenuOpen &&
 									currentMenu === 'moreActions' ?
@@ -487,6 +489,7 @@ const TopBar = (props) =>
 						{ fullscreenEnabled &&
 							<Tooltip title={fullscreenTooltip}>
 								<IconButton
+									data-testid='fullscreenButton'
 									aria-label={intl.formatMessage({
 										id             : 'tooltip.enterFullscreen',
 										defaultMessage : 'Enter fullscreen'
@@ -585,6 +588,7 @@ const TopBar = (props) =>
 							>
 								<span className={classes.disabledButton}>
 									<IconButton
+										data-testid='showLobbyButton'
 										aria-label={intl.formatMessage({
 											id             : 'tooltip.lobby',
 											defaultMessage : 'Show lobby'
@@ -700,7 +704,7 @@ const TopBar = (props) =>
 				getContentAnchorEl={null}
 			>
 				{ currentMenu === 'moreActions' &&
-					<Paper>
+					<Paper data-testid='moreActionList' >
 						{
 							(
 								localRecordingState.status === 'start' ||
@@ -829,6 +833,7 @@ const TopBar = (props) =>
 						</MenuItem>
 						}
 						<MenuItem
+							data-testid='addVideo'
 							disabled={!canProduceExtraVideo}
 							onClick={() =>
 							{
@@ -850,6 +855,7 @@ const TopBar = (props) =>
 							</p>
 						</MenuItem>
 						<MenuItem
+							data-testid='hideSelfView'
 							onClick={() =>
 							{
 								handleMenuClose();
@@ -888,6 +894,7 @@ const TopBar = (props) =>
 							}
 						</MenuItem>
 						<MenuItem
+							data-testid='help'
 							onClick={() =>
 							{
 								handleMenuClose();
@@ -908,6 +915,7 @@ const TopBar = (props) =>
 							</p>
 						</MenuItem>
 						<MenuItem
+							data-testid='abaut'
 							onClick={() =>
 							{
 								handleMenuClose();

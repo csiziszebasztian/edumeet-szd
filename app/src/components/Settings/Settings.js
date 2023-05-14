@@ -101,6 +101,7 @@ const Settings = ({
 					})}
 				/>
 				<Tab
+					data-testid='advancedSetting'
 					label={intl.formatMessage({
 						id             : 'label.advanced',
 						defaultMessage : 'Advanced'
