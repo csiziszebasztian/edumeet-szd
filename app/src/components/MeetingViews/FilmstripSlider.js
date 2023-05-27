@@ -371,6 +371,8 @@ class FilmstripSlider extends React.PureComponent
 			mode
 		} = this.props;
 
+		const peerIdList = Object.keys(peers);
+
 		const activePeerId = this.getActivePeerId();
 
 		const speakerStyle =
@@ -456,7 +458,7 @@ class FilmstripSlider extends React.PureComponent
 							</div>
 						</Grid>
 						{
-							spotlights.length > 0 &&
+							peerIdList.length > spotlights.length &&
 							<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
 								{
 									gridDirection === 'row' ? (
@@ -495,7 +497,7 @@ class FilmstripSlider extends React.PureComponent
 							)
 						}
 						{
-							spotlights.length > 0 &&
+							peerIdList.length > spotlights.length &&
 							<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
 								{
 									gridDirection === 'row' ? (
