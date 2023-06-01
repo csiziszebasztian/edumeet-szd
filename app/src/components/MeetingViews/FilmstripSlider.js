@@ -316,9 +316,9 @@ class FilmstripSlider extends React.PureComponent
 		{
 
 			let peerIndex = peerIdList.findIndex(
-				(peerElement) => peerElement === spotlights[0]);
+				(peerElement) => peerElement === spotlights.at(-1));
 
-			peerIndex = (peerIndex || peerIdList.length) - 1;
+			peerIndex = (peerIndex + 1) % peerIdList.length;
 
 			newSpotlights.shift();
 
@@ -346,9 +346,9 @@ class FilmstripSlider extends React.PureComponent
 		{
 
 			let peerIndex = peerIdList.findIndex(
-				(peerElement) => peerElement === spotlights.at(-1));
+				(peerElement) => peerElement === spotlights[0]);
 
-			peerIndex = (peerIndex + 1) % peerIdList.length;
+			peerIndex = (peerIndex || peerIdList.length) - 1;
 
 			newSpotlights.pop();
 
