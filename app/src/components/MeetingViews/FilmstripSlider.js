@@ -490,7 +490,7 @@ class FilmstripSlider extends React.PureComponent
 							</div>
 						</Grid>
 						{
-							peerIdList.length > spotlights.length &&
+							peerIdList.length > spotlights.length && spotlights.length > 0 &&
 							<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
 								{
 									gridDirection === 'row' ? (
@@ -522,12 +522,12 @@ class FilmstripSlider extends React.PureComponent
 												/>
 											</div>
 										</Grid>
-									)
+									);
 								})
 							) : ('')
 						}
 						{
-							peerIdList.length > spotlights.length &&
+							peerIdList.length > spotlights.length && spotlights.length > 0 &&
 							<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
 								{
 									gridDirection === 'row' ? (
