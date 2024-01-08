@@ -700,7 +700,7 @@ const Peer = (props) =>
 				</div>
 			</div>
 
-			{ extraVideoConsumers.map((consumer) =>
+			{ extraVideoConsumers?.map((consumer) =>
 			{
 				return (
 					<div key={consumer.id}
