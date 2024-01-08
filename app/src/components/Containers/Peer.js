@@ -339,7 +339,7 @@ const Peer = (props) =>
 
 	}, [ height, theme ]);
 
-	if (peer.picture)
+	if (peer?.picture)
 	{
 		rootStyle.backgroundImage = `url(${peer.picture})`;
 		rootStyle.backgroundSize = 'auto 100%';
@@ -666,7 +666,7 @@ const Peer = (props) =>
 						showQuality
 						advancedMode={advancedMode}
 						peer={peer}
-						displayName={peer.displayName}
+						displayName={peer?.displayName}
 						showPeerInfo
 						consumerSpatialLayers={webcamConsumer ? webcamConsumer.spatialLayers : null}
 						consumerTemporalLayers={webcamConsumer ? webcamConsumer.temporalLayers : null}
@@ -695,7 +695,7 @@ const Peer = (props) =>
 						opusConfig={micConsumer && micConsumer.opusConfig}
 						showAudioAnalyzer={showAudioAnalyzer}
 					>
-						<Volume id={peer.id} />
+						<Volume id={peer?.id} />
 					</VideoView>
 				</div>
 			</div>

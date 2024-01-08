@@ -348,9 +348,9 @@ class FilmstripSlider extends React.PureComponent
 		{
 
 			let peerIndex = peerIdList.findIndex(
-				(peerElement) => peerElement === spotlights[0]);
+				(peerElement) => peerElement === spotlights.at(-1));
 
-			peerIndex = (peerIndex || peerIdList.length) - 1;
+			peerIndex = (peerIndex + 1) % peerIdList.length;
 
 			newSpotlights.shift();
 
@@ -378,9 +378,9 @@ class FilmstripSlider extends React.PureComponent
 		{
 
 			let peerIndex = peerIdList.findIndex(
-				(peerElement) => peerElement === spotlights.at(-1));
+				(peerElement) => peerElement === spotlights[0]);
 
-			peerIndex = (peerIndex + 1) % peerIdList.length;
+			peerIndex = (peerIndex || peerIdList.length) - 1;
 
 			newSpotlights.pop();
 
@@ -402,6 +402,8 @@ class FilmstripSlider extends React.PureComponent
 			classes,
 			mode
 		} = this.props;
+
+		const peerIdList = Object.keys(peers);
 
 		const activePeerId = this.getActivePeerId();
 
@@ -488,57 +490,53 @@ class FilmstripSlider extends React.PureComponent
 							</div>
 						</Grid>
 						{
-							spotlights.length ? (
-								<Grid item>
-									<Grid container wrap='nowrap' justify='center' direction={gridDirection} alignItems='center' spacing={2}>
-										<Grid item>
-											<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
-												{
-													gridDirection === 'row' ? (
-														<KeyboardArrowLeftIcon/>
-													) : (
-														<KeyboardArrowUpIcon/>
-													)
-												}
-											</Fab>
+							peerIdList.length > spotlights.length &&
+							<Fab size='medium' onClick={(event) => this.handlePrevPeer(event)}>
+								{
+									gridDirection === 'row' ? (
+										<KeyboardArrowLeftIcon/>
+									) : (
+										<KeyboardArrowUpIcon/>
+									)
+								}
+							</Fab>
+						}
+						{
+							spotlights.length > 0 ? (
+								spotlights.map((peerId) =>
+								{
+									return (
+										<Grid key={peerId} item>
+											<div
+												key={peerId}
+												className={classnames(shareScreenItem, {
+													selected : this.props.selectedPeerId === peerId,
+													active   : peerId === activePeerId
+												})}
+											>
+												<Peer
+													advancedMode={advancedMode}
+													id={peerId}
+													style={peerStyle}
+													smallContainer
+												/>
+											</div>
 										</Grid>
-										{
-											spotlights.map((peerId) =>
-											{
-												return (
-													<Grid key={peerId} item>
-														<div
-															key={peerId}
-															className={classnames(shareScreenItem, {
-																selected : this.props.selectedPeerId === peerId,
-																active   : peerId === activePeerId
-															})}
-														>
-															<Peer
-																advancedMode={advancedMode}
-																id={peerId}
-																style={peerStyle}
-																smallContainer
-															/>
-														</div>
-													</Grid>
-												);
-											})
-										}
-										<Grid item>
-											<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
-												{
-													gridDirection === 'row' ? (
-														<KeyboardArrowRightIcon/>
-													) : (
-														<KeyboardArrowDownIcon/>
-													)
-												}
-											</Fab>
-										</Grid>
-									</Grid>
-								</Grid>
+									)
+								})
 							) : ('')
+						}
+						{
+							peerIdList.length > spotlights.length &&
+							<Fab size='medium' onClick={(event) => this.handleNextPeer(event)}>
+								{
+									gridDirection === 'row' ? (
+										<KeyboardArrowRightIcon/>
+									) : (
+										<KeyboardArrowDownIcon/>
+									)
+								}
+							</Fab>
 						}
 					</Grid>
 				</div>

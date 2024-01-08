@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-	spotlightPeersSelector,
-	videoBoxesSelector
+	videoBoxesSelector,
+	spotlightPeersSelector
 } from '../../store/selectors';
 import classnames from 'classnames';
 import PropTypes from 'prop-types';

@@ -101,12 +101,6 @@ const AppearanceSettings = (props) =>
 			id             : 'label.l1',
 			defaultMessage : 'L1 view'
 		})
-	}, {
-		value : 'round',
-		label : intl.formatMessage({
-			id             : 'label.round',
-			defaultMessage : 'Round view'
-		})
 	} ];
 
 	return (
