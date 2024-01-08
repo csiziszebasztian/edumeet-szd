@@ -62,20 +62,9 @@ const TransferList = ({
 
 	const [ checked, setChecked ] = React.useState([]);
 
-	const [ left, setLeft ] = React.useState([]);
+	const left = not(Object.keys(peers), spotlights);
 
-	const [ right, setRight ] = React.useState([]);
-
-	React.useEffect(() =>
-	{
-		setChecked([]);
-		setLeft([ ...Object.keys(peers).filter((peer) =>
-		{
-			return !spotlights.includes(peer);
-		})
-		]);
-		setRight([ ...spotlights ]);
-	}, [ peers, spotlights ]);
+	const right = spotlights;
 
 	const leftChecked = intersection(checked, left);
 	const rightChecked = intersection(checked, right);
@@ -118,6 +107,7 @@ const TransferList = ({
 		if (newSpotlight.length <= settings.lastN)
 		{
 			roomClient.updateSpotlights(newSpotlight);
+			setChecked([]);
 		}
 		else
 		{
@@ -130,6 +120,8 @@ const TransferList = ({
 		const newSpotlight = left.concat(rightChecked);
 
 		roomClient.updateSpotlights(not(spotlights, newSpotlight));
+
+		setChecked([]);
 	};
 
 	const customList = (title, items) => (
