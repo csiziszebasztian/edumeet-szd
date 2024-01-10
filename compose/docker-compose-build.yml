@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+# edumeet
+  edumeet:
+    env_file: .env
+    image: ${REPOSITORY}/${EDUMEET}:${TAG}
+    build:
+      args:
+        - BASEDIR=${BASEDIR}
+        - EDUMEET=${EDUMEET}
+        - NODE_ENV=${NODE_ENV}
+        - SERVER_DEBUG=${SERVER_DEBUG}
+        - GIT_SERVER=${GIT_SERVER}
+        - REPOSITORY=${REPOSITORY}
+        - BRANCH=${BRANCH}
+        - SOURCE=${SOURCE}
+      context: ./
+    restart: unless-stopped
+    volumes:
+      - ./configs/server:${BASEDIR}/${EDUMEET}/server/dist/config
+      - ./configs/app:${BASEDIR}/${EDUMEET}/server/dist/public/config
+      - ./certs:${BASEDIR}/${EDUMEET}/server/certs
+    network_mode: "host"
+    stdin_open: true
+    tty: true
+#   environment:
+#     - DEBUG=mediasoup*

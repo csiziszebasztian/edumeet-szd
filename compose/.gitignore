@@ -1,1 +1,5 @@
-data
+/configs/app/*
+/configs/server/*
+!/configs/app/*.example.*
+!/configs/server/*.example.*
+/certs
