@@ -1,77 +1,12 @@
-#build edumeet 
-FROM node:16-bullseye-slim AS edumeet-builder
-
-# Args
-ARG BASEDIR
-ARG EDUMEET
-ARG NODE_ENV
-ARG SERVER_DEBUG
-ARG GIT_SERVER
-ARG REPOSITORY
-ARG BRANCH
-ARG REACT_APP_DEBUG
-ARG SOURCE
-
-WORKDIR ${BASEDIR}
-
-RUN apt-get update;DEBIAN_FRONTEND=noninteractive apt-get install -yq git bash jq build-essential python python3-pip openssl libssl-dev pkg-config;apt-get clean
-
-# If SOURCE is "local", copy the app and server directories from the local source code into the Docker image
-RUN if [ "${SOURCE}" = "local" ]; then \
-  mkdir -p ${BASEDIR}/${EDUMEET}/app && \
-  cp -r ../app ${BASEDIR}/${EDUMEET}/app; \
-  mkdir -p ${BASEDIR}/${EDUMEET}/server && \
-  cp -r ../server ${BASEDIR}/${EDUMEET}/server; \
- fi
-
-# If SOURCE is "git", clone the Git repository into the Docker image
-RUN if [ "${SOURCE}" = "git" ]; then \
-   git clone --single-branch --branch ${BRANCH} ${GIT_SERVER}/${REPOSITORY}/${EDUMEET}.git; \
- fi
-
-#install app dep
-WORKDIR ${BASEDIR}/${EDUMEET}/app
-RUN yarn install --production=false
-
-#set and build app in producion mode/minified/.
-ENV NODE_ENV ${NODE_ENV}
-ENV REACT_APP_DEBUG=${REACT_APP_DEBUG}
-RUN yarn run build
-
-#install server dep
-WORKDIR ${BASEDIR}/${EDUMEET}/server
-RUN yarn install --production=false && yarn run build
-
-# create edumeet package 
-RUN ["/bin/bash", "-c", "cat <<< $(jq '.bundleDependencies += .dependencies' package.json) > package.json" ]
-RUN npm pack
-
-# create edumeet image
 FROM node:16-bullseye-slim
-
-# Args:
-ARG BASEDIR
-ARG EDUMEET
-ARG NODE_ENV
-ARG SERVER_DEBUG
-
-WORKDIR ${BASEDIR}
-
-COPY --from=edumeet-builder ${BASEDIR}/${EDUMEET}/server/edumeet-server*.tgz  ${BASEDIR}/${EDUMEET}/server/
-
-WORKDIR ${BASEDIR}/${EDUMEET}/server
-
-RUN tar xzf edumeet-server*.tgz && mv package/* ./ && rm -r package edumeet-server*.tgz
-
-RUN apt-get update;DEBIAN_FRONTEND=noninteractive apt-get install -yq openssl;apt-get clean
-
-
-# Web PORTS
-EXPOSE 80 443 
-EXPOSE 40000-49999/udp
-
-## run server 
-ENV DEBUG ${SERVER_DEBUG}
-
-COPY docker-entrypoint.sh /
-ENTRYPOINT ["/docker-entrypoint.sh"]
+RUN apt-get update && \
+    apt-get install -y bash jq build-essential python-is-python3 python3-pip openssl libssl-dev pkg-config && \
+    apt-get clean
+WORKDIR /edumeet
+ENV DEBUG=edumeet*,mediasoup*
+RUN npm install -g nodemon && \
+    npm install -g concurrently
+RUN touch /.yarnrc && mkdir -p /.yarn /.cache/yarn && chmod -R 775 /.yarn /.yarnrc /.cache
+CMD concurrently --names "app ,server" \
+    "cd app && yarn && yarn build && yarn start"
+     "cd server && yarn && yarn build && yarn start" \

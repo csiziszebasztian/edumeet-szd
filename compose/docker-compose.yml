@@ -3,15 +3,20 @@ version: "3.9"
 services:
 # edumeet
   edumeet:
+    build: .
     env_file: .env
     image: ${REPOSITORY}/${EDUMEET}:${TAG}
-    depends_on: 
+    depends_on:
       - redis
     restart: unless-stopped
     volumes:
-      - ${PWD}/configs/server:${BASEDIR}/${EDUMEET}/server/dist/config
-      - ${PWD}/configs/app:${BASEDIR}/${EDUMEET}/server/dist/public/config
-      - ${PWD}/certs:${BASEDIR}/${EDUMEET}/server/certs
+      - ..:/edumeet
+      # - ./configs/server/config.js:${BASEDIR}/${EDUMEET}/server/dist/config.js:ro
+      # - ./configs/server/config.yaml:${BASEDIR}/${EDUMEET}/server/dist/config.yaml:ro
+      # - ./configs/app/config.js:${BASEDIR}/${EDUMEET}/server/dist/public/config.js:ro
+      # - ./certs:${BASEDIR}/${EDUMEET}/server/dist/certs
+      # - ./images:${BASEDIR}/${EDUMEET}/server/dist/public/images
+      # - ./privacy:${BASEDIR}/${EDUMEET}/server/dist/public/static/privacy
     network_mode: "host"
     stdin_open: true
     tty: true
@@ -19,9 +24,9 @@ services:
 #     - DEBUG=edumeet*
 
   redis:
-    image: redis:6
+    image: redis:latest
     network_mode: "host"
-    entrypoint: redis-server /usr/local/etc/redis/redis.conf
+    # entrypoint: redis-server /usr/local/etc/redis/redis.conf
     restart: unless-stopped
-    volumes:
-      - ${PWD}/configs/redis:/usr/local/etc/redis
+    # volumes:
+      # - ./configs/redis/redis.conf:/usr/local/etc/redis/redis.conf:ro

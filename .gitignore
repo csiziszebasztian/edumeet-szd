@@ -15,5 +15,4 @@ node_modules/
 /app/public/config/*.pem
 yarn-error.log
 /.idea/
-.obsidian
 app/playwright-report/*
