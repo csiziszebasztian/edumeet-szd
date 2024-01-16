@@ -243,14 +243,7 @@ test("Participnats test: firefox", async () => {
 
   await expect(page2.getByTestId("participantList").getByText(userId1).first()).toBeVisible();
   await expect(page2.getByTestId("meContainer").getByText(userId2)).toBeVisible();
-
-  // await expect(page2.getByTestId("isSpeaker")).toBeVisible();
-  // await expect(page2.getByTestId("isSpeaker")).toBeEnabled();
-  // await expect(page2.locator("role=tooltip")).not.toBeVisible();
-  // await page2.getByTestId("isSpeaker").hover();
-  // await expect(page2.locator("role=tooltip")).toBeVisible();
-  // await expect(page2.locator("role=tooltip")).toHaveText("Active speaker");
-
+  
   await expect(page2.getByTestId("muteParticipant")).toBeVisible();
   await expect(page2.getByTestId("muteParticipant")).toBeEnabled();
   await page2.getByTestId("muteParticipant").hover();
