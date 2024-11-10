@@ -20,7 +20,7 @@ Official (Original) edumeet-docker GitHub repository: [edumeet-docker](https://g
 
 See here for my [Docker](https://github.com/csiziszebasztian/edumeet-szd-docker) installation procedures.
 
-Installation example is based on Debian/Ubuntu Linux operating system.
+Installation example is based on Debian/Ubuntu Linux operating system. Tested on Ubuntu 20.04 LTS.
 
 1. Install [NodeJS](https://nodejs.org/en) 16.X with [NVM](https://github.com/nvm-sh/nvm).
 
@@ -40,7 +40,12 @@ npm install --global yarn
 ```bash
 sudo apt update && sudo apt install -y curl git python-is-python3 python3-pip build-essential redis openssl libssl-dev pkg-config
 ```	
-4. Clone edumeet-szd git repository
+4. Enable and start redis service. More info in the [redis home page](https://redis.io/).
+```bash
+sudo systemctl enable redis-server
+sudo systemctl start redis-server
+```
+5. Clone edumeet-szd git repository
 ```bash
 git clone https://github.com/csiziszebasztian/edumeet-szd
 cd edumeet-szd
@@ -49,16 +54,6 @@ cd edumeet-szd
 ```bash
 git checkout develop 
 ```
-### Configuration
-
-1. Run creat-config.sh in edumeet-szd root. 
-```bash
-chmod +x creat-config.sh
-./creat-config.sh
-```
-
-2. Copy the yaml configuration from the thesis to server/config.yaml.
-
 ### Build
 
 ```bash
