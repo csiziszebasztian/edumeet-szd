@@ -50,10 +50,6 @@ sudo systemctl start redis-server
 git clone https://github.com/csiziszebasztian/edumeet-szd
 cd edumeet-szd
 ```
-(switch to the "develop" branch to get the latest features)
-```bash
-git checkout develop 
-```
 ### Build
 
 ```bash
